@@ -1,0 +1,32 @@
+1.
+create table VaccineRegistration(mobileNumber long,dateOfRegistration date);
+
+2.
+create table VaccinationCenter(code int,centerName varchar(255),address varchar(255),
+city varchar(255),state varchar(255),pincode varchar(255));
+
+3.
+create table Member(dose1Status tinyint,dose2Status tinyint,dose1Date date,dose2Date date);
+
+4.
+create table VaccineCount(count int,price double);
+
+5.
+create table AadharCard(aadharNo long,fingerPrints varchar(255),irisscan varchar(255));
+
+6.
+create table PanCard(panNo varchar(255));
+
+7.
+create table VaccineInventory(LocalDate date);
+
+8.
+create table IdCard(id int,name varchar(255),dob date,gender varchar(255),
+address varchar(255),city varchar(255),state varchar(255),pincode varchar(255));
+
+9.
+create table Vaccine(vaccineId int,vaccineName varchar(255),description varchar(255));
+
+10.
+create table Appointment(bookingId long,mobileNo long,bookingDate date,slot varchar(255),
+status tinyint);
