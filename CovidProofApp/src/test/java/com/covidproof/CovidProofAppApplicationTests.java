@@ -1,4 +1,4 @@
-package org.CovidProof;
+package com.covidproof;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
