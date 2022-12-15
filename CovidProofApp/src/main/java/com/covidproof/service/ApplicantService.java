@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.covidproof.exception.ApplicantException;
-import com.covidproof.exception.VaccineException;
+
 import com.covidproof.model.Entity.IdCard;
 import com.covidproof.model.Entity.Vaccine;
 
@@ -13,7 +13,16 @@ public interface ApplicantService {
 	// Registering an Applicant
 	// Parameter --> IdCard object
 	// Return --> Registered Applicant
-	public IdCard registerAnApplicant(IdCard idCard) throws ApplicantException;
+	public IdCard registerAnApplicant(IdCard idCard,Integer adno) throws ApplicantException;
+	
+	//get all
+	public List<IdCard> getAllIdCards() throws ApplicantException;
+	
+	//delete
+	public Boolean deleteCard(Integer id) throws ApplicantException;
+	
+	//Apply for vaccination
+	public String applyForVaccination(Integer vid,Integer vcid,Integer dose,Appointment appointment) throws ApplicantException;
 	
 	// Applicant Login
 	public IdCard loginApplicant(String mobile, LocalDate dob) throws ApplicantException;

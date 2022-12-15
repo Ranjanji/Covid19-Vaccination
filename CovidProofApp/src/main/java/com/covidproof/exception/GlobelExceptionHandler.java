@@ -26,4 +26,19 @@ public class GlobelExceptionHandler {
 		ErrorDetails err=new ErrorDetails(LocalDateTime.now(),e.getMessage(),w.getDescription(false));
 		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
 	}
+	@ExceptionHandler(VaccineCenterException.class)
+	public ResponseEntity<ErrorDetails> myHandler4(VaccineCenterException e,WebRequest w){
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(),e.getMessage(),w.getDescription(false));
+		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	}
+	@ExceptionHandler(VaccineException.class)
+	public ResponseEntity<ErrorDetails> myHandler5(VaccineException e,WebRequest w){
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(),e.getMessage(),w.getDescription(false));
+		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	}
+	@ExceptionHandler(AadharException.class)
+	public ResponseEntity<ErrorDetails> myHandler5(AadharException e,WebRequest w){
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(),e.getMessage(),w.getDescription(false));
+		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	}
 }

@@ -9,11 +9,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.covidproof.dao.AadharDAO;
 import com.covidproof.dao.ApplicantDAO;
-import com.covidproof.dao.AppointmentDAO;
-import com.covidproof.dao.VaccineDAO;
-import com.covidproof.exception.ApplicantException;
-import com.covidproof.exception.VaccineException;
+
 import com.covidproof.model.Entity.Appointment;
 import com.covidproof.model.Entity.Dose;
 import com.covidproof.model.Entity.IdCard;
@@ -24,14 +22,18 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Autowired
 	private ApplicantDAO adao;
 	
-	@Autowired
-	private AppointmentDAO appdao;
-	
-	@Autowired
-	private VaccineDAO vdao;
+
 
 	@Override
-	public IdCard registerAnApplicant(IdCard idCard) throws ApplicantException {
+	public IdCard registerAnApplicant(IdCard idCard,Integer adno) throws ApplicantException,AadharException {
+		Optional<AadharCard> optional=addao.findById(adno);
+	    AadharCard ac=optional.get();
+	    if(ac!=null) {
+	    	throw new AadharException("AadharCard is Already Registered!!");
+	    }
+	    idCard.setAadharcard(ac);
+	    ac.setIdCard(idCard);
+	    addao.save(ac);
 		IdCard registeredApplicant = adao.save(idCard);
 		if(registeredApplicant!=null) {
 			return registeredApplicant;
@@ -130,37 +132,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		}
 	}
 
-	@Override
-	public String changeSlot(String mobile, LocalDate dob, LocalDate newDate, String newSlot) throws ApplicantException {
-		IdCard existingApplicant =  adao.findByMobAndDob(mobile, dob);
-		
-		if(existingApplicant!=null) {
-			Set<Dose> doses = existingApplicant.getDoses();
-			Dose[] dosesArr = doses.toArray(new Dose[doses.size()]);
-			
-			for(int i=0;i<dosesArr.length;i++) {
-				Appointment appointment = dosesArr[i].getAppointment();
-				if(dosesArr[i].getDoseStatus()=="Pending") {
-					Appointment requirdeAppointment = appdao.getAppointmentByDateAndSlot(newDate, newSlot);
-					if(requirdeAppointment.getBookingStatus()=="Available") {
-						requirdeAppointment.setBookingStatus("Booked");
-						dosesArr[i].getAppointment().setDate(newDate);
-						dosesArr[i].getAppointment().setSlot(newSlot);
-						dosesArr[i].getAppointment().setBookingStatus("Available");		
-						return "New slot booked. "+newDate+" and "+newSlot;
-						} else {
-							return "This slot is already booked. Please try another one.";
-						}
-				}
-			}
-			return "You have already taken all your doses. Not applicable.";
-		}
-		else {
-			throw new ApplicantException("Incorrect mobile number or incorrect dob or both. Please try again.");
-		}
-		
-	}
-
+	
 	
 	// If applicant wants to know about all kinds of available vaccines
 	@Override

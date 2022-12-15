@@ -12,7 +12,7 @@ public class myCon {
 	@Autowired
 	private testImpl service;
 	
-	@PostMapping("/admin")
+	@PostMapping("/fjdlfjkl")
 	public String addAdmin(@RequestBody Admin a) {
 		return service.saveAd(a);
 	}
