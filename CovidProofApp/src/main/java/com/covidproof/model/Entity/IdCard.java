@@ -45,6 +45,6 @@ public class IdCard {
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private AadharCard aadharcard;
-	@OneToMany(mappedBy = "idCard",cascade = CascadeType.ALL)//bydirctional
+	@OneToMany(mappedBy = "idCard",cascade = CascadeType.ALL) //bydirctional
 	private Set<Dose> doses;
 }

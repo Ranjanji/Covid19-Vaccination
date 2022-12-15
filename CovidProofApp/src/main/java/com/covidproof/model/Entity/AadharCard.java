@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,11 +25,9 @@ import lombok.ToString;
 @Entity
 public class AadharCard {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer number;
-	private String finger;
-	private String iriss;
+	private Long adNo;
+	private String mobile;
 	@OneToOne(mappedBy = "aadharcard",cascade = CascadeType.ALL) //bydirctional
-	@JoinColumn(name = "number")
+	@JoinColumn(name = "adNo")
 	private IdCard idCard;
 }
