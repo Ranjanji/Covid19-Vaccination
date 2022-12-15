@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CovidProof</title>
+
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+    <header>
+        <div id="nav">
+
+            <div id="logo">
+                <img src="images\covidProof.png" alt="">
+            </div>
+
+            <div class="loginbar">
+               <span onclick="openCloseform('login')">Login</span>
+               <span onclick="openCloseform('registration')">Registration</span>
+               <span onclick="openCloseform('admin')">Admin Login</span>
+            </div>
+        </div>
+
+        <div class="loginbar" id="mob">
+            <span onclick="openCloseform('login')">Login</span>
+            <span onclick="openCloseform('registration')">Registration</span>
+            <span onclick="openCloseform('admin')">Admin Login</span>
+        </div>
+    </header>
+
+    <main>
+
+        <div id="wallpaper">
+            <img src="https://www.cowin.gov.in/assets/images/independance.svg" alt="India">
+        </div>
+
+        <div id="mainBox">
+                <h2>Register Yourself On Covid Proof To Get Your Armor Against Corona Vrius</h2>
+        </div>
+    </main>
+
+    <div id="login" class="fromBG">
+        <form class="formCss" name="loginForm">
+            <p>User Login</p>
+            <p>Enter Your Registered Mobile Number And Date Of Birth</p>
+            <span><u onclick="openCloseform('login')">close</u></span>
+            <input type="text" name="mobile" placeholder="Mobile Number" required>
+            <input type="date" name="date" placeholder="Date Of Birth" required>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <div  id="registration" class="fromBG" >
+        <form class="formCss">
+            <p>User Registration</p>
+            <p>Enter Your Details To Register</p>
+            <span><u onclick="openCloseform('registration')">close</u></span>
+            <input type="text" placeholder="name" required>
+            <input type="date" placeholder="DateOfBirth"  required>
+            <input type="text" placeholder="Gender" required>
+            <input type="text" placeholder="Address" required>
+            <input type="text" placeholder="City" required>
+            <input type="text" placeholder="State" required>
+            <input type="text" placeholder="pincode" required>
+            <input type="text" placeholder="AdharcardNo" required>
+            <input type="text" placeholder="PancardNo" required>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+    <div id="admin" class="fromBG">
+        <form class="formCss">
+            <p>Admin Login</p>
+            <p>Enter Your Registered Mobile Number And Password</p>
+            <span><u onclick="openCloseform('admin')">close</u></span>
+            <input type="text" placeholder="Mobile Number">
+            <input type="text" placeholder="Password">
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <footer>
+
+    </footer>
+    
+</body>
+</html>
+
+<script src="index.js"></script>

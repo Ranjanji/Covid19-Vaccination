@@ -1,0 +1,179 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CovidProof</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+    <header>
+        <div id="nav">
+            <div id="logo">
+                <img src="images\covidProof.png" alt="">
+            </div>
+
+            <div class="loginBar">
+                <span  onclick="openCloseform('serachSlot')">Search Slot</span>
+                <span onclick="openCloseform('booking')">Book Appointment</span>
+                <span>LogOut</span>
+            </div>
+        </div>
+   
+    </header>
+
+    <main>
+
+        <section>
+
+            <div id="vaccineStatus">
+                <div>Dose 1</div>
+                <div>Dose 2</div>
+                <div>You are unvaccinated! Book Your Appointment Now To Become CovidProof</div>
+            </div>
+
+        </section>
+
+
+        <section id="mainBox">
+
+            <div id="profInfo">
+                    <ul>
+                        <h2>User Profile</h2>
+                        <li>User Id: <span></span></li>
+                        <li>Name: <span></span></li>
+                        <li>Mobile Number <span></span></li>
+                        <li>Date Of Birth: <span></span></li>
+                        <li>Gender: <span></span></li>
+                        <li>Address:<span></span></li>
+                        <li>City:<span></span></li>
+                        <li>State: <span></span></li>
+                        <li>Pincode: <span></span></li>
+                        <li>Pan Number: <span></span></li>
+                        <li>Adhar Number: <span></span></li>
+                    </ul>
+            </div>
+
+            <div id="appointDetails">
+                <h2>Appointment Details</h2>
+                    
+                <table>
+                    <thead>
+                        <th>
+                            <td>SrNo</td>
+                            <td>Dose No</td>
+                            <td>Vaccine Center</td>
+                            <td>Date</td>
+                            <td>Slot</td>
+                            <td>Vaccine</td>
+                        </th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+
+                </table>
+            </div>
+         
+
+        </section>
+
+        <div id="booking" class="formBG">
+            <form class="formCss">
+                <p>Book Appointment</p>
+                <span><u onclick="openCloseform('booking')">close</u></span>
+                <select name="" id="">
+                    <option value="">Select Dose</option>
+                    <option value="dose1">Dose 1</option>
+                    <option value="dose2">Dose 2</option>
+                </select>
+                <select name="" id="">
+                    <option value="">Select Vaccine</option>
+                    <option value="">Covid Sheild</option>
+                    <option value="">Bharat Vax</option>
+                    <option value="">Covaxin</option>
+                    <option value="">Sputnik V</option>
+                </select>
+
+                <select name="" id="centerState" onclick="showCity('centerState')">
+                    <option value="">Select State</option>
+                    <option value="0">Delhi</option>
+                    <option value="1">Karnataka</option>
+                    <option value="2">Maharashtra</option>
+                    <option value="3">Tamil Nadu</option>
+                    <option value="4">West Bengal</option>
+                </select>
+
+                <select name="" id="centerCity" onclick="showCenter('centerCity')">
+                    <option value="">Select City</option>
+                </select>
+
+                <select name="" id="centerName">
+                    <option value="">Select Center</option>
+                </select>
+
+                <input type="Date" placeholder="Select Date">
+                <select name="" id="" value="Select Slot">
+                    <option value="">Select Slot</option>
+                    <option value="slot1">Slot 1(9.00am to 9.30am)</option>
+                    <option value="slot2">Slot 2(9.30am to 10.00am)</option>
+                    <option value="slot3">Slot 3(10.00am to 10.30am)</option>
+                    <option value="slot4">Slot 4(10.30am to 11.00am)</option>
+                    <option value="slot5">Slot 5(11.00am to 11.30am)</option>
+                    <option value="slot6">Slot 6(11.30am to 12.00pm)</option>
+                    <option value="slot7">Slot 7(1.00pm to 1.30pm)</option>
+                    <option value="slot8">Slot 8(1.30pm to 2.00pm)</option>
+                    <option value="slot9">Slot 9(2.00pm to 2.30pm)</option>
+                </select>
+     
+                <input type="submit" value="Book Appointment">
+            </form>
+
+        </div>
+
+        <div id="serachSlot" class="formBG">
+            <form class="formCss">
+                <p>Search Slot</p>
+                <span><u onclick="openCloseform('serachSlot')">close</u></span>
+                <select name="" id="">
+                    <option value="">Select Vaccine</option>
+                    <option value="">Covid Sheild</option>
+                    <option value="">Bharat Vax</option>
+                    <option value="">Covaxin</option>
+                    <option value="">Sputnik V</option>
+                </select>
+
+                <select name="" id="centerStateSer" onclick="showCitySer('centerStateSer')">
+                    <option value="">Select State</option>
+                    <option value="0">Delhi</option>
+                    <option value="1">Karnataka</option>
+                    <option value="2">Maharashtra</option>
+                    <option value="3">Tamil Nadu</option>
+                    <option value="4">West Bengal</option>
+                </select>
+
+                <select name="" id="centerCitySer" onclick="showCenterSer('centerCitySer')">
+                    <option value="">Select City</option>
+                </select>
+
+                <select name="" id="centerNameSer">
+                    <option value="">Select Center</option>
+                </select>
+                <input type="submit" value="Search Slot">
+            </form>
+
+        </div>
+
+    </main>
+
+    <div class="loginbar" id="mob">
+        <span  onclick="openCloseform('serachSlot')"><a href="#serachSlot">Search Slot</a></span>
+        <span onclick="openCloseform('booking')"><a href="#booking">Book Appointment</a></span>
+        <span>LogOut</span>
+    </div>
+    
+</body>
+</html>
+
+<script src="profile.js"></script>

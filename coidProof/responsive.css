@@ -1,0 +1,107 @@
+@media only screen and (max-width: 960px) {
+ 
+ #nav>div:nth-child(2){
+    width: 50vw;
+ }
+
+ main{
+    display: block;
+    margin: auto;
+    margin-top: 70px;
+ }
+ main>div{
+    width: 100vw;
+    height: 40vh;
+ }
+ #mainBox{
+    display: block;
+}
+
+#mainBox>div{
+    width: 100vw;
+    height: 100vh;
+    margin-bottom: 80px;
+}
+
+#mainBox>div:nth-child(2){
+    width: 90vw; 
+    margin: auto;
+}
+
+#vaccineStatus>div:nth-child(3){
+    display: none;
+}
+
+#appointDetails>table{
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+#appointDetails>table>thead{
+    width: 100%;
+}
+
+#mainBox>div:first-child{
+    width: 90vw;
+    margin-top: 10px;
+}
+}
+
+
+@media only screen and (max-width: 520px) {
+ 
+    #nav>div:nth-child(2){
+       display: none;
+    }
+
+    #mob{
+        display: flex;
+    }
+
+    #mainBox>h2{
+        font-size: 15px;
+    }
+
+    .formCss{
+        width: 300px;
+    }
+
+    #vaccineStatus{
+        width: 100%;
+    }
+
+    #vaccineStatus>div:nth-child(3){
+        display: none;
+    }
+
+    #mainBox{
+        display: block;
+    }
+
+    #mainBox>div{
+        width: 100vw;
+        height: 100vh;
+        margin-bottom: 80px;
+    }
+
+    #mainBox>div:nth-child(2){
+        width: 90vw; 
+        margin: auto;
+    }
+  
+    #appointDetails>table{
+        width: 100%;
+        margin: auto;
+        margin-top: 10px;
+    }
+
+    #appointDetails>table>thead{
+        width: 100%;
+    }
+
+    #mainBox>div:first-child{
+        width: 90vw;
+        margin-top: 10px;
+    }
+}
