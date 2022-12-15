@@ -11,17 +11,29 @@ import org.springframework.stereotype.Service;
 
 import com.covidproof.dao.AadharDAO;
 import com.covidproof.dao.ApplicantDAO;
-
+import com.covidproof.dao.AppointmentDAO;
+import com.covidproof.dao.VaccineDAO;
+import com.covidproof.exception.AadharException;
+import com.covidproof.exception.ApplicantException;
+import com.covidproof.exception.VaccineException;
+import com.covidproof.model.Entity.AadharCard;
 import com.covidproof.model.Entity.Appointment;
 import com.covidproof.model.Entity.Dose;
 import com.covidproof.model.Entity.IdCard;
 import com.covidproof.model.Entity.Vaccine;
+import com.covidproof.model.NonEntity.Status;
 
 @Service
 public class ApplicantServiceImpl implements ApplicantService {
 	@Autowired
 	private ApplicantDAO adao;
-	
+	@Autowired
+	private AadharDAO addao;
+	@Autowired
+	private AppointmentDAO appdao;
+		
+	@Autowired
+	private VaccineDAO vdao;
 
 
 	@Override
@@ -144,5 +156,63 @@ public class ApplicantServiceImpl implements ApplicantService {
 			return vaccineList;
 		}
 	}
+
+	public List<IdCard> getAllIdCards() throws ApplicantException {
+		// TODO Auto-generated method stub
+		List<IdCard> list=adao.findAll();
+		if(list.size()==0) {
+			throw new ApplicantException("No Applicant Details");
+		}
+		return list;
+	}
+
+	@Override
+	public Boolean deleteCard(Integer id) throws ApplicantException {
+		// TODO Auto-generated method stub
+		Optional<IdCard> opt=adao.findById(id);
+		IdCard card=opt.get();
+		if(card==null) {
+			throw new ApplicantException("Applicant Id is not Correct");
+		}
+		adao.delete(card);
+		return true;
+	}
+
+	@Override
+	public String applyForVaccination(Integer vid, Integer vcid, Integer dose, Appointment appointment)
+			throws ApplicantException {
+		
+		return null;
+	}
+	public String changeSlot(String mobile, LocalDate dob, LocalDate newDate, String newSlot) throws ApplicantException {
+		IdCard existingApplicant =  adao.findByMobAndDob(mobile, dob);
+		
+		if(existingApplicant!=null) {
+			Set<Dose> doses = existingApplicant.getDoses();
+			Dose[] dosesArr = doses.toArray(new Dose[doses.size()]);
+			
+			for(int i=0;i<dosesArr.length;i++) {
+				Appointment appointment = dosesArr[i].getAppointment();
+				if(dosesArr[i].getDoseStatus()=="Pending") {
+					Appointment requirdeAppointment = appdao.getAppointmentByDateAndSlot(newDate, newSlot);
+					if(requirdeAppointment.getBookingStatus()=="Available") {
+						requirdeAppointment.setBookingStatus("Booked");
+						dosesArr[i].getAppointment().setDate(newDate);
+						dosesArr[i].getAppointment().setSlot(newSlot);
+						dosesArr[i].getAppointment().setBookingStatus("Available");		
+						return "New slot booked. "+newDate+" and "+newSlot;
+						} else {
+							return "This slot is already booked. Please try another one.";
+						}
+				}
+			}
+			return "You have already taken all your doses. Not applicable.";
+		}
+		else {
+			throw new ApplicantException("Incorrect mobile number or incorrect dob or both. Please try again.");
+		}
+		
+	}
+
 	
 }

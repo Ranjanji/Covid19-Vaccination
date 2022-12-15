@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.covidproof.exception.ApplicantException;
-
+import com.covidproof.exception.VaccineException;
+import com.covidproof.model.Entity.Appointment;
 import com.covidproof.model.Entity.IdCard;
 import com.covidproof.model.Entity.Vaccine;
 

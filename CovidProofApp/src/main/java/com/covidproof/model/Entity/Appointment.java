@@ -42,8 +42,6 @@ public class Appointment {
 	@NotBlank
 	@NotEmpty
 	private String slot;
-	@NotNull
-	@NotBlank
-	@NotEmpty
+	
 	private String bookingStatus;
 }
