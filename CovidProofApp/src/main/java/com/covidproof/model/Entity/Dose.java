@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -31,6 +33,8 @@ public class Dose {
 	private Integer doseId;
 	
 	@NotNull(message = "Dose count cannot be null.")
+	@Min(value = 0, message = "dose count cannot be less than 0")
+	@Max(value = 2, message = "dose count cannot be more than 2")
 	private Integer doseCount;
 	
 	@NotNull(message = "Dose count cannot be null.")
