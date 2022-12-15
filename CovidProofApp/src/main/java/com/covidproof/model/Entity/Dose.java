@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +29,13 @@ public class Dose {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer doseId;
+	
+	@NotNull(message = "Dose count cannot be null.")
 	private Integer doseCount;
+	
+	@NotNull(message = "Dose count cannot be null.")
+	@NotBlank(message = "Dose status cannot be blank.")
+	@NotEmpty(message = "Dose status cannot be empty.")
 	private String doseStatus;
 	
 	@ManyToOne                           //bydirectional
