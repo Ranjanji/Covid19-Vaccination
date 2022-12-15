@@ -3,6 +3,7 @@ package com.covidproof.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.covidproof.dao.VaccineDAO;
@@ -11,6 +12,7 @@ import com.covidproof.model.Entity.Vaccine;
 
 @Service
 public class VaccineServiceImpl implements VaccineService{
+	@Autowired
 	private VaccineDAO vaccineDao;
 
 	@Override

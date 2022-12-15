@@ -1,6 +1,6 @@
 package com.covidproof.exception;
 
-public class VaccineException extends Exception {
+public class VaccineException extends RuntimeException {
 
 	public VaccineException() {
 		super();

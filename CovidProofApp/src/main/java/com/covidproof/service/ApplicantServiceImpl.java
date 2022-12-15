@@ -9,8 +9,12 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.covidproof.dao.AadharDAO;
 import com.covidproof.dao.ApplicantDAO;
+import com.covidproof.exception.AadharException;
 import com.covidproof.exception.ApplicantException;
+import com.covidproof.model.Entity.AadharCard;
+import com.covidproof.model.Entity.Appointment;
 import com.covidproof.model.Entity.Dose;
 import com.covidproof.model.Entity.IdCard;
 
@@ -18,9 +22,20 @@ import com.covidproof.model.Entity.IdCard;
 public class ApplicantServiceImpl implements ApplicantService {
 	@Autowired
 	private ApplicantDAO adao;
+	
+	@Autowired
+	private AadharDAO addao;
 
 	@Override
-	public IdCard registerAnApplicant(IdCard idCard) throws ApplicantException {
+	public IdCard registerAnApplicant(IdCard idCard,Integer adno) throws ApplicantException,AadharException {
+		Optional<AadharCard> optional=addao.findById(adno);
+	    AadharCard ac=optional.get();
+	    if(ac!=null) {
+	    	throw new AadharException("AadharCard is Already Registered!!");
+	    }
+	    idCard.setAadharcard(ac);
+	    ac.setIdCard(idCard);
+	    addao.save(ac);
 		IdCard registeredApplicant = adao.save(idCard);
 		if(registeredApplicant!=null) {
 			return registeredApplicant;
@@ -92,6 +107,35 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Override
 	public String cancelAppointment(String mobile, LocalDate dob) throws ApplicantException {
 		IdCard existingApplicant =  adao.findByMobile(mobile);
+		return null;
+	}
+
+	@Override
+	public List<IdCard> getAllIdCards() throws ApplicantException {
+		// TODO Auto-generated method stub
+		List<IdCard> list=adao.findAll();
+		if(list.size()==0) {
+			throw new ApplicantException("No Applicant Details");
+		}
+		return list;
+	}
+
+	@Override
+	public Boolean deleteCard(Integer id) throws ApplicantException {
+		// TODO Auto-generated method stub
+		Optional<IdCard> opt=adao.findById(id);
+		IdCard card=opt.get();
+		if(card==null) {
+			throw new ApplicantException("Applicant Id is not Correct");
+		}
+		adao.delete(card);
+		return true;
+	}
+
+	@Override
+	public String applyForVaccination(Integer vid, Integer vcid, Integer dose, Appointment appointment)
+			throws ApplicantException {
+		
 		return null;
 	}
 	
