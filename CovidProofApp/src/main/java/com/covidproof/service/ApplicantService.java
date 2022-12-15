@@ -4,8 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.covidproof.exception.ApplicantException;
-import com.covidproof.model.Entity.Appointment;
+
 import com.covidproof.model.Entity.IdCard;
+import com.covidproof.model.Entity.Vaccine;
 
 public interface ApplicantService {
 
@@ -37,6 +38,12 @@ public interface ApplicantService {
 	
 	// Canceling appointment
 	public String cancelAppointment(String mobile, LocalDate dob) throws ApplicantException;
+	
+	// Change slot
+	public String changeSlot(String mobile, LocalDate dob, LocalDate newDate, String newSlot) throws ApplicantException;
+	
+	// If applicant wants to know about all kinds of available vaccines
+	public List<Vaccine> getAllVaccineDetails() throws VaccineException;
 	
 	
 }
