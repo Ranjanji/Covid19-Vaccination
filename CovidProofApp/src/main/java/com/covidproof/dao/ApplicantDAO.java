@@ -16,4 +16,6 @@ public interface ApplicantDAO extends JpaRepository<IdCard, Integer> {
 	
 	// getting applicant by mobile number
 	public IdCard findByMobile(String mobile);
+	
+	
 }
