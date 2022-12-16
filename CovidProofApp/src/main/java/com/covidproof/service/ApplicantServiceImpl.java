@@ -6,21 +6,28 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.hibernate.boot.model.relational.SimpleAuxiliaryDatabaseObject;
+import org.hibernate.loader.AbstractEntityJoinWalker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.covidproof.dao.AadharDAO;
 import com.covidproof.dao.ApplicantDAO;
 import com.covidproof.dao.AppointmentDAO;
+import com.covidproof.dao.DoseDAO;
+import com.covidproof.dao.VaccineCenterDAO;
 import com.covidproof.dao.VaccineDAO;
 import com.covidproof.exception.AadharException;
 import com.covidproof.exception.ApplicantException;
+import com.covidproof.exception.DoseException;
+import com.covidproof.exception.VaccineCenterException;
 import com.covidproof.exception.VaccineException;
 import com.covidproof.model.Entity.AadharCard;
 import com.covidproof.model.Entity.Appointment;
 import com.covidproof.model.Entity.Dose;
 import com.covidproof.model.Entity.IdCard;
 import com.covidproof.model.Entity.Vaccine;
+import com.covidproof.model.Entity.VaccineCenter;
 import com.covidproof.model.NonEntity.Status;
 
 @Service
@@ -34,8 +41,77 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 	@Autowired
 	private VaccineDAO vdao;
+	
+	@Autowired
+	private VaccineCenterDAO vcdao;
+	
+	@Autowired
+	private DoseDAO doseDAO;
 
-
+	@Override
+	public Dose applyForVaccination(Integer id,Integer vid, Integer vcid, Integer dose, Appointment appointment)
+			throws ApplicantException {
+		if(dose==0 || dose>2) {
+			throw new DoseException("Dose can be 1 or 2 !!!");
+		}
+		Optional<IdCard> idcardOptional=adao.findById(id);
+		IdCard idCard=idcardOptional.get();
+		if(idCard==null) {
+			throw new ApplicantException("Applicant Id is Not Correct");
+		}
+		Set<Dose> doses=idCard.getDoses();
+		if(doses.size()>=2) {
+			throw new DoseException("Both the Doses Already Taken");
+		}else if(doses.size()==1) {
+			if(dose==1) {
+				throw new DoseException("First Dose Already Taken");
+			}
+		}else if(dose==2 && doses.size()==0) {
+			throw new DoseException("Dose 1 not taken!! you cant apply for dose 2...");
+		}
+		
+		Optional<Vaccine> vaccOptional=vdao.findById(vid);
+		Vaccine vaccine=vaccOptional.get();
+		if(vaccine==null) {
+			throw new VaccineException("Vaccine is Not Available");
+		}
+		Optional<VaccineCenter> vsOptional=vcdao.findById(vcid);
+		VaccineCenter vaccineCenter=vsOptional.get();
+		if(vaccineCenter==null) {
+			throw new VaccineCenterException("VaccineCenter is Not Available");
+		}
+		Dose doseObj=new Dose();
+		doseObj.setAppointment(appointment);
+		doseObj.setCenter(vaccineCenter);
+		doseObj.setDoseCount(dose);
+		doseObj.setVaccine(vaccine);
+		doseObj.setIdCard(idCard);
+		doseObj.setDoseStatus(Status.PENDING.toString());
+		
+		doses.add(doseObj);
+		appointment.setBookingStatus(Status.COMPLETED.toString());
+		
+		//Validation of slot availability
+		List<Dose> dosesOfCenter=doseDAO.findByCenter(vaccineCenter);
+		for(Dose d:dosesOfCenter) {
+			Appointment app=d.getAppointment();
+			String status=app.getBookingStatus();
+			LocalDate date=app.getDate();
+			String slot=app.getSlot();
+			if(date.toString().equals(appointment.getDate().toString())) {
+				if(status.equals(Status.PENDING.toString())) {
+					if(slot.equals(appointment.getSlot())) {
+						throw new DoseException("Slot Already Booked!!");
+					}
+				}
+			}
+		}
+		adao.save(idCard);
+		doseDAO.save(doseObj);
+		appdao.save(appointment);
+		 
+		return doseObj;
+	}
 	@Override
 	public IdCard registerAnApplicant(IdCard idCard,Integer adno) throws ApplicantException,AadharException {
 		Optional<AadharCard> optional=addao.findById(adno);
@@ -178,12 +254,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		return true;
 	}
 
-	@Override
-	public String applyForVaccination(Integer vid, Integer vcid, Integer dose, Appointment appointment)
-			throws ApplicantException {
-		
-		return null;
-	}
+	
 	public String changeSlot(String mobile, LocalDate dob, LocalDate newDate, String newSlot) throws ApplicantException {
 		IdCard existingApplicant =  adao.findByMobAndDob(mobile, dob);
 		

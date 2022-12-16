@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.covidproof.model.Entity.AadharCard;
 import com.covidproof.model.Entity.Admin;
 import com.covidproof.model.Entity.Appointment;
+import com.covidproof.model.Entity.Dose;
 import com.covidproof.model.Entity.IdCard;
 import com.covidproof.model.NonEntity.ApplicantLogin;
 import com.covidproof.service.AadharcardService;
@@ -47,8 +48,11 @@ public class ApplicantController {
 		
 		return new ResponseEntity<>(service.registerAnApplicant(card, adno),HttpStatus.ACCEPTED);
 	}
-	@PostMapping("/vaccination/{vid}/{vcid}/{dose}")
-	public ResponseEntity<String> applyForVaccination(@RequestBody Appointment appointment,@PathVariable("vid")Integer vid,@PathVariable("vcid")Integer vcid,@PathVariable("dose")Integer dose){
-		return new ResponseEntity<String>(service.applyForVaccination(vid, vcid, dose, appointment),HttpStatus.ACCEPTED);
+	@PostMapping("/vaccination/{id}/{vid}/{vcid}/{dose}")
+	public ResponseEntity<Dose> applyForVaccination(@RequestBody Appointment appointment,@PathVariable("id")Integer id,@PathVariable("vid")Integer vid,@PathVariable("vcid")Integer vcid,@PathVariable("dose")Integer dose){
+		
+		return new ResponseEntity<>(service.applyForVaccination(id,vid, vcid, dose, appointment),HttpStatus.ACCEPTED);
 	}
+	
+	
 }
