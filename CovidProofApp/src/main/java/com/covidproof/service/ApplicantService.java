@@ -24,7 +24,7 @@ public interface ApplicantService {
 	public Boolean deleteCard(Integer id) throws ApplicantException;
 	
 	//Apply for vaccination
-	public Dose applyForVaccination(Integer id,Integer vid,Integer vcid,Integer dose,Appointment appointment) throws ApplicantException;
+	public IdCard applyForVaccination(Integer id,Integer vid,Integer vcid,Integer dose,Appointment appointment) throws ApplicantException;
 	
 	// Applicant Login
 	public IdCard loginApplicant(String mobile, LocalDate dob) throws ApplicantException;
