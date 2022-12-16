@@ -84,13 +84,25 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	@Override
-	public String adminSession(String mobile) throws AdminException {
+	public CurrentSession adminSession(String mobile) throws AdminException {
 		Admin admin=dao.findByMobile(mobile);
 		if(admin==null) throw new AdminException("Please Enter a valid Mobile Number");
 		
 		Optional <CurrentSession> userSession=csDao.findById(admin.getAdminId());
 		if(!userSession.isPresent()) throw new AdminException("Please Login First");
-		return "User is Logged In!!!";
+		return userSession.get();
+	}
+	@Override
+	public Admin logoutAdmin(String key) throws AdminException {
+		
+        CurrentSession adminSession = csDao.findByUuid(key);
+		if(adminSession == null) {
+			throw new AdminException("User Not Logged In with this number");
+		}
+		Optional<Admin> admin=dao.findById(adminSession.getUserId()); 
+		csDao.delete(adminSession);
+	    if(!admin.isPresent()) throw new AdminException("Register Admin Not found...please Resister");
+		return admin.get();
 	}
 
 }
