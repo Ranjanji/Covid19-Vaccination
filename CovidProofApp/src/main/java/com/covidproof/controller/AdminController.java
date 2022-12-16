@@ -41,9 +41,13 @@ public class AdminController {
 	@Autowired 
 	private ApplicantService apService;
 	
-	@GetMapping("/login")
+	@PostMapping("/login")
 	public ResponseEntity<Admin> loginAdmin(@RequestBody AdminLoginDTO aLoginDto){
 		return new ResponseEntity<>(aservice.loginAdmin(aLoginDto), HttpStatus.ACCEPTED);
+	}
+	@PostMapping("/logout")
+	public ResponseEntity<Admin> logoutAdmin(@RequestBody String mobile){
+		return new ResponseEntity<>(aservice.logoutAdmin(aservice.adminSession(mobile).getUuid()), HttpStatus.ACCEPTED);
 	}
 	
 	@PostMapping("/register")
