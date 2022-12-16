@@ -86,7 +86,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public CurrentSession adminSession(String mobile) throws AdminException {
 		Admin admin=dao.findByMobile(mobile);
-		if(admin==null) throw new AdminException("Please Enter a valid Mobile Number");
+		if(admin==null) throw new AdminException("Please Enter a valid Mobile Number/////");
 		
 		Optional <CurrentSession> userSession=csDao.findById(admin.getAdminId());
 		if(!userSession.isPresent()) throw new AdminException("Please Login First");
