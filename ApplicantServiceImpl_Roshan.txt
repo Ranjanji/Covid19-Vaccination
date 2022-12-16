@@ -1,0 +1,234 @@
+package com.covidproof.service;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.covidproof.dao.ApplicantDAO;
+import com.covidproof.dao.AppointmentDAO;
+import com.covidproof.dao.VaccineDAO;
+import com.covidproof.exception.ApplicantException;
+import com.covidproof.exception.VaccineException;
+import com.covidproof.model.Entity.Appointment;
+import com.covidproof.model.Entity.Dose;
+import com.covidproof.model.Entity.IdCard;
+import com.covidproof.model.Entity.Vaccine;
+
+@Service
+public class ApplicantServiceImpl implements ApplicantService {
+	
+	// Autowiring dependincies
+	@Autowired
+	private ApplicantDAO adao;
+	
+	@Autowired
+	private AppointmentDAO appdao;
+	
+	@Autowired
+	private VaccineDAO vdao;
+
+	
+	// Registering an Applicant
+	@Override
+	public IdCard registerAnApplicant(IdCard idCard) throws ApplicantException {
+		IdCard registeredApplicant = adao.save(idCard);
+		if(registeredApplicant!=null) {
+			return registeredApplicant;
+		} else {
+			throw new ApplicantException("Registration failed! Please try again with valid credentials. :)");
+		}
+	}
+
+	// Applicant Login
+	@Override
+	public IdCard loginApplicant(String mobile, LocalDate dob) throws ApplicantException {
+		IdCard applicant = adao.findByMobAndDob(mobile, dob);
+		if(applicant!=null) {
+			return applicant;
+		} else {
+			throw new ApplicantException("Login failed. Incorrect mobile number or incorrect dob or both.");
+		}
+	}
+
+	// Get applicant by id
+	@Override
+	public IdCard getApplicantById(Integer id) throws ApplicantException {
+		Optional<IdCard> opt = adao.findById(id);
+		if(opt!=null) {
+			IdCard existingApplicant = opt.get();
+			return existingApplicant;
+		} else {
+			throw new ApplicantException("No applicant found with this Id");
+		}
+	}
+
+	// Update applicant details
+	@Override
+	public IdCard updateApplicantDetails(IdCard idCard) throws ApplicantException {
+		IdCard updatedApplicantDetails = adao.save(idCard);
+		if(updatedApplicantDetails!=null) {
+			return updatedApplicantDetails;
+		} else {
+			throw new ApplicantException("No such applicant found."+idCard);
+		}
+	}
+
+	// Checking vaccination status
+	@Override
+	public List<String> getVaccinationStatus(String mobile) throws ApplicantException {
+		
+		// Written this method assuming only 2 doses will be provided to user
+		// if we consider total 3 doses then this method should be changed a little.
+		
+		IdCard existingApplicant = adao.findByMobile(mobile);
+		if(existingApplicant!=null) {
+			String name = existingApplicant.getName();
+			Set<Dose> doses = existingApplicant.getDoses();
+			
+			Dose[] dosesArr = doses.toArray(new Dose[doses.size()]);
+			
+			List<String> list = new ArrayList<>();
+			
+			for(int i=0;i<doses.size();i++) {
+				int doseCount = dosesArr[i].getDoseCount();
+				String doseStatus = dosesArr[i].getDoseStatus();
+				
+				String vaccineName = dosesArr[i].getVaccine().getName();
+				
+				String str = "ApplicantName: "+name+", DoseCount: "+doseCount+", DoseStatus: "+doseStatus+", VaccineName: "+vaccineName;
+				
+				list.add(str);
+			}
+			
+			return list;
+		} else {
+			throw new ApplicantException("No applicant found with this moble number: "+mobile);
+		}
+	}
+
+	// Canceling appointment
+	@Override
+	public String cancelAppointment(String mobile, LocalDate dob, Integer doseId) throws ApplicantException {
+		IdCard existingApplicant =  adao.findByMobAndDob(mobile, dob);
+		
+		if(existingApplicant!=null) {
+			Set<Dose> doses = existingApplicant.getDoses();
+			Dose[] dosesArr = doses.toArray(new Dose[doses.size()]);
+			
+			for(int i=0;i<dosesArr.length;i++) {
+				if(dosesArr[i].getDoseStatus().equals("PENDING")) {
+					Appointment appointment = dosesArr[i].getAppointment();
+					appdao.delete(appointment);
+					return "appointment successfully canceled.";
+				}
+			}
+			return "you have already taken the vaccine dose with id: "+doseId;
+		} 
+		else {
+			throw new ApplicantException("Incorrect mobile number or incorrect dob or both. Please try again.");
+			
+		}
+	}
+
+	// Change slot
+	@Override
+	public String changeSlot(String mobile, LocalDate dob, LocalDate newDate, String newSlot) throws ApplicantException {
+		IdCard existingApplicant =  adao.findByMobAndDob(mobile, dob);
+		
+		if(existingApplicant!=null) {
+			Set<Dose> doses = existingApplicant.getDoses();
+			Dose[] dosesArr = doses.toArray(new Dose[doses.size()]);
+			
+			for(int i=0;i<dosesArr.length;i++) {
+				Appointment appointment = dosesArr[i].getAppointment();
+				if(dosesArr[i].getDoseStatus()=="Pending") {
+					Appointment requirdeAppointment = appdao.getAppointmentByDateAndSlot(newDate, newSlot);
+					if(requirdeAppointment.getBookingStatus()=="Available") {
+						requirdeAppointment.setBookingStatus("Booked");
+						dosesArr[i].getAppointment().setDate(newDate);
+						dosesArr[i].getAppointment().setSlot(newSlot);
+						dosesArr[i].getAppointment().setBookingStatus("Available");		
+						return "New slot booked. "+newDate+" and "+newSlot;
+						} else {
+							return "This slot is already booked. Please try another one.";
+						}
+				}
+			}
+			return "You have already taken all your doses. Not applicable.";
+		}
+		else {
+			throw new ApplicantException("Incorrect mobile number or incorrect dob or both. Please try again.");
+		}
+		
+	}
+
+	
+	// If applicant wants to know about all kinds of available vaccines
+	@Override
+	public List<Vaccine> getAllVaccineDetails() throws VaccineException {
+		List<Vaccine> vaccineList = vdao.findAll();
+		if(vaccineList.isEmpty()) {
+			throw new VaccineException("No vaccine details available for now.");
+		} else {
+			return vaccineList;
+		}
+	}
+
+// Booking an appointment
+	@Override
+	public String bookAppointment(String mobile, String vaccineName, String State, String city, String center_name,
+			LocalDate date, String slot) throws DateSlotException {
+		Appointment appointment = appdao.getAppointmentByDateAndSlot(date, slot);
+		if(appointment==null) {
+			IdCard existingApplicant =  adao.findByMobile(mobile);
+			Set<Dose> doses = existingApplicant.getDoses();
+			// Creating Dose object
+			Dose dose = new Dose();
+			if(doses.size()==0) {
+				dose.setDoseCount(1);
+			} else if(doses.size() == 1) {
+				dose.setDoseCount(2);
+			} else {
+				return "You have already booked appointment for the 2nd dose.";
+			}
+				dose.setDoseStatus("PENDING");
+				
+				// Creating Appointment object
+				Appointment appointmentObj = new Appointment();
+				appointmentObj.setBookingStatus("BOOKED");
+				appointmentObj.setDate(date);
+				appointmentObj.setMobileNo(mobile);
+				appointmentObj.setSlot(slot);
+				
+				// Registering Appointment object with Dose object
+				dose.setAppointment(appointmentObj);
+				
+				// Getting the VaccineCenter object as per the provided center name
+				VaccineCenter vcobject = vcdao.findByCenterName(center_name);
+				
+				// Registering the fetched Vaccine center object with Dose object
+				dose.setCenter(vcobject);
+				
+				// Getting the vaccine object as per the provided name 
+				Vaccine vaccineObj = vdao.findByName(vaccineName);
+				
+				// Registering fetched Vaccine object with Dose object
+				dose.setVaccine(vaccine);
+				
+				// Finally registering the Dose object with IdCard object as a list element
+				// dosedao.save(dose); (Check if optional or mandatory)
+				existingApplicant.getDoses().add(dose);
+				return "Successfully booked the slot. To see the relevant details go to menu and options accordingly.";
+		}
+		
+		else {
+			return "This slot is already booked. Please try for another slot or date.";
+		}
+	}
+	
+}
