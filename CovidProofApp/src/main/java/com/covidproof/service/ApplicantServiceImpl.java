@@ -113,14 +113,15 @@ public class ApplicantServiceImpl implements ApplicantService {
 		return doseObj;
 	}
 	@Override
-	public IdCard registerAnApplicant(IdCard idCard,Integer adno) throws ApplicantException,AadharException {
-		Optional<AadharCard> optional=addao.findById(adno);
-	    AadharCard ac=optional.get();
-	    if(ac!=null) {
+	public IdCard registerAnApplicant(IdCard idCard,Long adno) throws ApplicantException,AadharException {
+		Optional<AadharCard> op=addao.findById(adno);
+	    if(op.isPresent())
 	    	throw new AadharException("AadharCard is Already Registered!!");
-	    }
-	    idCard.setAadharcard(ac);
+	    AadharCard ac=new AadharCard();
+	    ac.setAdNo(adno);
+	    ac.setMobile(idCard.getMobile());
 	    ac.setIdCard(idCard);
+	    idCard.setAadharcard(ac);
 	    addao.save(ac);
 		IdCard registeredApplicant = adao.save(idCard);
 		if(registeredApplicant!=null) {

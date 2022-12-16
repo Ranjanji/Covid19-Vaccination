@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.covidproof.model.Entity.AadharCard;
 @Repository
-public interface AadharDAO extends JpaRepository<AadharCard, Integer> {
+public interface AadharDAO extends JpaRepository<AadharCard, Long> {
 
 }

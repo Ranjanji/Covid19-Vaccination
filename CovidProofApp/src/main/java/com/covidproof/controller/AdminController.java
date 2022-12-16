@@ -45,8 +45,8 @@ public class AdminController {
 	public ResponseEntity<Admin> loginAdmin(@RequestBody AdminLoginDTO aLoginDto){
 		return new ResponseEntity<>(aservice.loginAdmin(aLoginDto), HttpStatus.ACCEPTED);
 	}
-	@PostMapping("/logout")
-	public ResponseEntity<Admin> logoutAdmin(@RequestBody String mobile){
+	@PostMapping("/logout/{mob}")
+	public ResponseEntity<Admin> logoutAdmin(@PathVariable("mob") String mobile){
 		return new ResponseEntity<>(aservice.logoutAdmin(aservice.adminSession(mobile).getUuid()), HttpStatus.ACCEPTED);
 	}
 	
@@ -66,32 +66,24 @@ public class AdminController {
 	public ResponseEntity<List<VaccineCenter>> getAllVaccineCenter(){
 		return new ResponseEntity<List<VaccineCenter>>(vcService.getAllVaccineCenter(),HttpStatus.FOUND);
 	}
-	@PostMapping("/vaccine/{n}/{d}")
-	public ResponseEntity<Vaccine> addVaccine(@RequestBody String mobile,@PathVariable("n")String name,@PathVariable("d")String des){
+	@PostMapping("/vaccine/{mob}")
+	public ResponseEntity<Vaccine> addVaccine(@RequestBody Vaccine v,@PathVariable("mob")String mobile){
 		    aservice.adminSession(mobile);
-			Vaccine vaccine=new Vaccine();
-			vaccine.setDescription(des);
-			vaccine.setName(name);
-			return new ResponseEntity<Vaccine>(vService.addVaccine(vaccine),HttpStatus.ACCEPTED);
+			return new ResponseEntity<Vaccine>(vService.addVaccine(v),HttpStatus.ACCEPTED);
 	}
-	@PostMapping("/vaccinecenter/{name}/{address}/{city}/{state}/{pin}")
-	public ResponseEntity<VaccineCenter> addVaccineCenter(@RequestBody String mobile,@PathVariable("name")String name,@PathVariable("address")String address,@PathVariable("city")String city,@PathVariable("state")String state,@PathVariable("pin")String pin){
+	@PostMapping("/vaccinecenter/{mob}")
+	public ResponseEntity<VaccineCenter> addVaccineCenter(@RequestBody VaccineCenter vc,@PathVariable("mob")String mobile){
 		aservice.adminSession(mobile);
-		VaccineCenter vc=new VaccineCenter();
-		vc.setAddress(address);
-		vc.setCenterName(name);
-		vc.setCity(city);
-		vc.setState(state);
 		return new ResponseEntity<>(vcService.addVaccineCenter(vc),HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("/vaccine/{id}")
-	public ResponseEntity<Vaccine> deleteVaccine(@RequestBody String mobile,@PathVariable("id")Integer id){
+	@DeleteMapping("/vaccine/{mob}/{id}")
+	public ResponseEntity<Vaccine> deleteVaccine(@PathVariable("mob")String mobile,@PathVariable("id")Integer id){
 		aservice.adminSession(mobile);
 		return new ResponseEntity<Vaccine>(vService.deleteVaccine(id),HttpStatus.ACCEPTED);
 	}
-	@DeleteMapping("/vaccinecenter/{id}")
-	public ResponseEntity<VaccineCenter> deleteVaccineCenter(@RequestBody String mobile,@PathVariable("id")Integer id){
+	@DeleteMapping("/vaccinecenter/{mob}/{id}")
+	public ResponseEntity<VaccineCenter> deleteVaccineCenter(@PathVariable("mob")String mobile,@PathVariable("id")Integer id){
 		aservice.adminSession(mobile);
 		return new ResponseEntity<>(vcService.deleteVaccineCenter(id),HttpStatus.ACCEPTED);
 	}
@@ -100,8 +92,8 @@ public class AdminController {
 	public ResponseEntity<List<IdCard>> getAllCards(){
 		return new ResponseEntity<List<IdCard>>(apService.getAllIdCards(),HttpStatus.FOUND);
 	}
-	@DeleteMapping("/idcard/{id}")
-	public ResponseEntity<Boolean> deleteCard(@RequestBody String mobile,@PathVariable("id")Integer id){
+	@DeleteMapping("/idcard/{mob}/{id}")
+	public ResponseEntity<Boolean> deleteCard(@PathVariable("mob")String mobile,@PathVariable("id")Integer id){
 		aservice.adminSession(mobile);
 		return new ResponseEntity<>(apService.deleteCard(id),HttpStatus.FOUND);
 	}

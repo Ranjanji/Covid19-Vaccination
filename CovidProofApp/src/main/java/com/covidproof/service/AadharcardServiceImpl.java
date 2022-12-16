@@ -27,8 +27,9 @@ public class AadharcardServiceImpl implements AadharcardService {
 	}
 
 	@Override
-	public AadharCard getAadharCard(Integer num) throws AadharException{
+	public AadharCard getAadharCard(Long num) throws AadharException{
 		Optional<AadharCard> optional=dao.findById(num);
+		
 	    AadharCard ac=optional.get();
 	    if(ac==null) {
 	    	throw new AadharException("Aadhar card Not Registered");
@@ -37,7 +38,7 @@ public class AadharcardServiceImpl implements AadharcardService {
 	}
 
 	@Override
-	public Boolean checkIfRegistered(Integer num) {
+	public Boolean checkIfRegistered(Long num) {
 		// TODO Auto-generated method stub
 		Optional<AadharCard> optional=dao.findById(num);
 	    AadharCard ac=optional.get();

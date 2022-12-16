@@ -15,7 +15,7 @@ public interface ApplicantService {
 	// Registering an Applicant
 	// Parameter --> IdCard object
 	// Return --> Registered Applicant
-	public IdCard registerAnApplicant(IdCard idCard,Integer adno) throws ApplicantException;
+	public IdCard registerAnApplicant(IdCard idCard,Long adno) throws ApplicantException;
 	
 	//get all
 	public List<IdCard> getAllIdCards() throws ApplicantException;
