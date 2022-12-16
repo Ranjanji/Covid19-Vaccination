@@ -35,7 +35,7 @@ public class AadharCard {
 	@NotEmpty
 	@Size(min=10,max=10, message="Mobile number should be of 10digit")
 	private String mobile;
-	@OneToOne(mappedBy = "aadharcard",cascade = CascadeType.ALL) //bydirctional
-	@JoinColumn(name = "adNo")
-	private IdCard idCard;
+//	@OneToOne(mappedBy = "aadharcard",cascade = CascadeType.ALL) //bydirctional
+//	@JoinColumn(name = "adNo")
+//	private IdCard idCard;
 }

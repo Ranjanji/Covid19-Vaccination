@@ -1,11 +1,13 @@
 package com.covidproof.model.Entity;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,7 +53,7 @@ public class IdCard {
 	@Past(message="DoB should be in past.")
 	private LocalDate dob;
 //	@NotNull
-//	@Size(min=18, message="Age should be 18 or above  ")
+//	@Size(min=18,max=52, message="Age should be 18 or above  ")
 	private Integer age;
 	
 	@NotNull
@@ -80,8 +82,9 @@ public class IdCard {
 	@Embedded
 	private PanCard pancard;
 	@OneToOne
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name = "adNo")
 	private AadharCard aadharcard;
-	@OneToMany(mappedBy = "idCard",cascade = CascadeType.ALL) //bydirectional
-	private Set<Dose> doses;
+	@OneToMany(cascade = CascadeType.ALL) //unidirectional
+	@JoinColumn(name="id")
+	private List<Dose> doses;
 }

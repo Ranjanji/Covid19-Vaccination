@@ -51,7 +51,7 @@ public class ApplicantController {
 		return new ResponseEntity<>(service.registerAnApplicant(card, adno),HttpStatus.ACCEPTED);
 	}
 	@PostMapping("/vaccination/{id}/{vid}/{vcid}/{dose}")
-	public ResponseEntity<Dose> applyForVaccination(@RequestBody Appointment appointment,@PathVariable("id")Integer id,@PathVariable("vid")Integer vid,@PathVariable("vcid")Integer vcid,@PathVariable("dose")Integer dose){
+	public ResponseEntity<IdCard> applyForVaccination(@RequestBody Appointment appointment,@PathVariable("id")Integer id,@PathVariable("vid")Integer vid,@PathVariable("vcid")Integer vcid,@PathVariable("dose")Integer dose){
 		
 		return new ResponseEntity<>(service.applyForVaccination(id,vid, vcid, dose, appointment),HttpStatus.ACCEPTED);
 	}

@@ -49,7 +49,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 	private DoseDAO doseDAO;
 
 	@Override
-	public Dose applyForVaccination(Integer id,Integer vid, Integer vcid, Integer dose, Appointment appointment)
+	public IdCard applyForVaccination(Integer id,Integer vid, Integer vcid, Integer dose, Appointment appointment)
 			throws ApplicantException {
 		if(dose==0 || dose>2) {
 			throw new DoseException("Dose can be 1 or 2 !!!");
@@ -59,12 +59,17 @@ public class ApplicantServiceImpl implements ApplicantService {
 		if(idCard==null) {
 			throw new ApplicantException("Applicant Id is Not Correct");
 		}
-		Set<Dose> doses=idCard.getDoses();
+		List<Dose> doses=idCard.getDoses();
 		if(doses.size()>=2) {
 			throw new DoseException("Both the Doses Already Taken");
 		}else if(doses.size()==1) {
+			
 			if(dose==1) {
 				throw new DoseException("First Dose Already Taken");
+			}
+			Dose tempDose=doses.get(0);
+			if(tempDose.getDoseStatus().equals(Status.PENDING.toString())) {
+				throw new DoseException("First Dose is PENDING!! You cant apply for Second");
 			}
 		}else if(dose==2 && doses.size()==0) {
 			throw new DoseException("Dose 1 not taken!! you cant apply for dose 2...");
@@ -85,7 +90,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		doseObj.setCenter(vaccineCenter);
 		doseObj.setDoseCount(dose);
 		doseObj.setVaccine(vaccine);
-		doseObj.setIdCard(idCard);
+//		doseObj.setIdCard(idCard);
 		doseObj.setDoseStatus(Status.PENDING.toString());
 		
 		doses.add(doseObj);
@@ -95,7 +100,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		List<Dose> dosesOfCenter=doseDAO.findByCenter(vaccineCenter);
 		for(Dose d:dosesOfCenter) {
 			Appointment app=d.getAppointment();
-			String status=app.getBookingStatus();
+			String status=d.getDoseStatus();
 			LocalDate date=app.getDate();
 			String slot=app.getSlot();
 			if(date.toString().equals(appointment.getDate().toString())) {
@@ -107,10 +112,10 @@ public class ApplicantServiceImpl implements ApplicantService {
 			}
 		}
 		adao.save(idCard);
-		doseDAO.save(doseObj);
-		appdao.save(appointment);
+//		doseDAO.save(doseObj);
+//		appdao.save(appointment);
 		 
-		return doseObj;
+		return idCard;
 	}
 	@Override
 	public IdCard registerAnApplicant(IdCard idCard,Long adno) throws ApplicantException,AadharException {
@@ -120,7 +125,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 	    AadharCard ac=new AadharCard();
 	    ac.setAdNo(adno);
 	    ac.setMobile(idCard.getMobile());
-	    ac.setIdCard(idCard);
+//	    ac.setIdCard(idCard);
 	    idCard.setAadharcard(ac);
 	    addao.save(ac);
 		IdCard registeredApplicant = adao.save(idCard);
@@ -171,7 +176,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		IdCard existingApplicant = adao.findByMobile(mobile);
 		if(existingApplicant!=null) {
 			String name = existingApplicant.getName();
-			Set<Dose> doses = existingApplicant.getDoses();
+			List<Dose> doses = existingApplicant.getDoses();
 			
 			Dose[] dosesArr = doses.toArray(new Dose[doses.size()]);
 			
@@ -199,7 +204,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		IdCard existingApplicant =  adao.findByMobAndDob(mobile, dob);
 		
 		if(existingApplicant!=null) {
-			Set<Dose> doses = existingApplicant.getDoses();
+			List<Dose> doses = existingApplicant.getDoses();
 			Dose[] dosesArr = doses.toArray(new Dose[doses.size()]);
 			
 			for(int i=0;i<dosesArr.length;i++) {
@@ -260,7 +265,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		IdCard existingApplicant =  adao.findByMobAndDob(mobile, dob);
 		
 		if(existingApplicant!=null) {
-			Set<Dose> doses = existingApplicant.getDoses();
+			List<Dose> doses = existingApplicant.getDoses();
 			Dose[] dosesArr = doses.toArray(new Dose[doses.size()]);
 			
 			for(int i=0;i<dosesArr.length;i++) {

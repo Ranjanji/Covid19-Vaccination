@@ -2,10 +2,12 @@ package com.covidproof.model.Entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -41,10 +43,6 @@ public class Dose {
 	@NotBlank(message = "Dose status cannot be blank.")
 	@NotEmpty(message = "Dose status cannot be empty.")
 	private String doseStatus;
-	
-	@ManyToOne                           //bydirectional
-	@JoinColumn(name="id")
-	private IdCard idCard;
 	
 	@ManyToOne(cascade = CascadeType.ALL)//unidirection
 	@JoinColumn(name = "vaccineId")
