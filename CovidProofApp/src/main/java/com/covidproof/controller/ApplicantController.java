@@ -15,7 +15,6 @@ import com.covidproof.model.Entity.AadharCard;
 import com.covidproof.model.Entity.Admin;
 import com.covidproof.model.Entity.Appointment;
 import com.covidproof.model.Entity.IdCard;
-import com.covidproof.model.NonEntity.AdminLogin;
 import com.covidproof.model.NonEntity.ApplicantLogin;
 import com.covidproof.service.AadharcardService;
 import com.covidproof.service.ApplicantService;

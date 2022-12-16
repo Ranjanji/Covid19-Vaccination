@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.covidproof.model.DTO.AdminDTO;
+import com.covidproof.model.DTO.AdminLoginDTO;
+import com.covidproof.model.DTO.AdminPasswordDTO;
 import com.covidproof.model.Entity.Admin;
 import com.covidproof.model.Entity.IdCard;
 import com.covidproof.model.Entity.Vaccine;
 import com.covidproof.model.Entity.VaccineCenter;
-import com.covidproof.model.NonEntity.AdminLogin;
 import com.covidproof.service.AdminService;
 import com.covidproof.service.ApplicantService;
 import com.covidproof.service.VaccineCenterService;
@@ -30,7 +30,7 @@ import com.covidproof.service.VaccineService;
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
-	private AdminService service;
+	private AdminService aservice;
 	
 	@Autowired
 	private VaccineService vService;
@@ -42,17 +42,17 @@ public class AdminController {
 	private ApplicantService apService;
 	
 	@GetMapping("/login")
-	public ResponseEntity<Admin> loginAdmin(@RequestBody AdminLogin al){
-		return new ResponseEntity<>(service.loginAdmin(al.getMobile(),al.getPassword()), HttpStatus.ACCEPTED);
+	public ResponseEntity<Admin> loginAdmin(@RequestBody AdminLoginDTO aLoginDto){
+		return new ResponseEntity<>(aservice.loginAdmin(aLoginDto), HttpStatus.ACCEPTED);
 	}
 	
 	@PostMapping("/register")
 	public ResponseEntity<Admin> registerAdmin(@RequestBody Admin a){
-		return new ResponseEntity<Admin>(service.registerAdmin(a),HttpStatus.ACCEPTED);
+		return new ResponseEntity<Admin>(aservice.registerAdmin(a),HttpStatus.ACCEPTED);
 	}
 	@PutMapping("/update")
-	public ResponseEntity<Admin> updatePassword(@RequestBody AdminDTO admindto){
-		return new ResponseEntity<Admin>(service.updatePassword(admindto.getMobile(), admindto.getOld_pass(), admindto.getNew_pass()),HttpStatus.ACCEPTED);
+	public ResponseEntity<Admin> updatePassword(@RequestBody AdminPasswordDTO aPassDto){
+		return new ResponseEntity<Admin>(aservice.updatePassword(aPassDto),HttpStatus.ACCEPTED);
 	}
 	@GetMapping("/vaccine")
 	public ResponseEntity<List<Vaccine>> getAllVaccine(){
@@ -63,16 +63,16 @@ public class AdminController {
 		return new ResponseEntity<List<VaccineCenter>>(vcService.getAllVaccineCenter(),HttpStatus.FOUND);
 	}
 	@PostMapping("/vaccine/{n}/{d}")
-	public ResponseEntity<Vaccine> addVaccine(@RequestBody AdminLogin al,@PathVariable("n")String name,@PathVariable("d")String des){
-		service.loginAdmin(al.getMobile(),al.getPassword() );
-		Vaccine vaccine=new Vaccine();
-		vaccine.setDescription(des);
-		vaccine.setName(name);
-		return new ResponseEntity<Vaccine>(vService.addVaccine(vaccine),HttpStatus.ACCEPTED);
+	public ResponseEntity<Vaccine> addVaccine(@RequestBody String mobile,@PathVariable("n")String name,@PathVariable("d")String des){
+		    aservice.adminSession(mobile);
+			Vaccine vaccine=new Vaccine();
+			vaccine.setDescription(des);
+			vaccine.setName(name);
+			return new ResponseEntity<Vaccine>(vService.addVaccine(vaccine),HttpStatus.ACCEPTED);
 	}
 	@PostMapping("/vaccinecenter/{name}/{address}/{city}/{state}/{pin}")
-	public ResponseEntity<VaccineCenter> addVaccineCenter(@RequestBody AdminLogin al,@PathVariable("name")String name,@PathVariable("address")String address,@PathVariable("city")String city,@PathVariable("state")String state,@PathVariable("pin")String pin){
-		service.loginAdmin(al.getMobile(),al.getPassword() );
+	public ResponseEntity<VaccineCenter> addVaccineCenter(@RequestBody String mobile,@PathVariable("name")String name,@PathVariable("address")String address,@PathVariable("city")String city,@PathVariable("state")String state,@PathVariable("pin")String pin){
+		aservice.adminSession(mobile);
 		VaccineCenter vc=new VaccineCenter();
 		vc.setAddress(address);
 		vc.setCenterName(name);
@@ -82,13 +82,13 @@ public class AdminController {
 	}
 	
 	@DeleteMapping("/vaccine/{id}")
-	public ResponseEntity<Vaccine> deleteVaccine(@RequestBody AdminLogin al,@PathVariable("id")Integer id){
-		service.loginAdmin(al.getMobile(),al.getPassword() );
+	public ResponseEntity<Vaccine> deleteVaccine(@RequestBody String mobile,@PathVariable("id")Integer id){
+		aservice.adminSession(mobile);
 		return new ResponseEntity<Vaccine>(vService.deleteVaccine(id),HttpStatus.ACCEPTED);
 	}
 	@DeleteMapping("/vaccinecenter/{id}")
-	public ResponseEntity<VaccineCenter> deleteVaccineCenter(@RequestBody AdminLogin al,@PathVariable("id")Integer id){
-		service.loginAdmin(al.getMobile(),al.getPassword() );
+	public ResponseEntity<VaccineCenter> deleteVaccineCenter(@RequestBody String mobile,@PathVariable("id")Integer id){
+		aservice.adminSession(mobile);
 		return new ResponseEntity<>(vcService.deleteVaccineCenter(id),HttpStatus.ACCEPTED);
 	}
 	
@@ -97,8 +97,8 @@ public class AdminController {
 		return new ResponseEntity<List<IdCard>>(apService.getAllIdCards(),HttpStatus.FOUND);
 	}
 	@DeleteMapping("/idcard/{id}")
-	public ResponseEntity<Boolean> deleteCard(@RequestBody AdminLogin al,@PathVariable("id")Integer id){
-		service.loginAdmin(al.getMobile(),al.getPassword() );
+	public ResponseEntity<Boolean> deleteCard(@RequestBody String mobile,@PathVariable("id")Integer id){
+		aservice.adminSession(mobile);
 		return new ResponseEntity<>(apService.deleteCard(id),HttpStatus.FOUND);
 	}
 }

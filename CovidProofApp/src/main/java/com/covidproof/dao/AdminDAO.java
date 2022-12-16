@@ -13,5 +13,5 @@ import com.covidproof.model.Entity.Admin;
 public interface AdminDAO extends JpaRepository<Admin, Integer> {
 	@Query("select a from Admin a where a.mobile=?1 and a.password=?2 ")
 	public Admin loginAdmin(String mobile,String password);
-	
+	public Admin findByMobile(String mobile);
 }
