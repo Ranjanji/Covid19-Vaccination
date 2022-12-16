@@ -34,17 +34,7 @@ public class Admin {
 	@Size(min = 10, max = 10, message = "Mobile number must be of 10 digits.")
 	private String mobile;
 	
-	@NotNull(message = "Admin mobile number cannot be null.")
+	@NotNull(message = "Admin password cannot be null.")
 	@Size(min = 5, max = 12, message = "Admin password must be minimum 5 & maximum 12 character length.")
 	private String password;
 }
-
-
-
-
-
-
-
-
-
-
