@@ -15,7 +15,7 @@ import lombok.ToString;
 @Getter
 @Setter
 public class PanCard {
-	@NotNull
-	@Pattern(regexp = "^[A-Z0-9]{8}",message="Length length must be 10 character")
+	@NotNull(message="pancard should not be null")
+	@Pattern(regexp = "^[A-Z0-9]{8}",message="Length must be 8 character")
 	private String panNumber;
 }

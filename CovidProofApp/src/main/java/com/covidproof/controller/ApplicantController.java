@@ -1,5 +1,7 @@
 package com.covidproof.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,13 +40,13 @@ public class ApplicantController {
 	@Autowired
 	private AadharcardService acService;
 	
-	@GetMapping("/login")
-	public ResponseEntity<IdCard> loginAdmin(@RequestBody ApplicantLogin al){
+	@PostMapping("/login")
+	public ResponseEntity<IdCard> loginAdmin(@Valid @RequestBody ApplicantLogin al){
 		return new ResponseEntity<>(service.loginApplicant(al.getMobile(), al.getDob()), HttpStatus.ACCEPTED);
 	}
 	
 	@PostMapping("/register/{adno}")
-	public ResponseEntity<IdCard> registerApplicant(@RequestBody IdCard card,@PathVariable("adno")Integer adno){
+	public ResponseEntity<IdCard> registerApplicant(@Valid @RequestBody IdCard card,@PathVariable("adno")Long adno){
 		
 		return new ResponseEntity<>(service.registerAnApplicant(card, adno),HttpStatus.ACCEPTED);
 	}

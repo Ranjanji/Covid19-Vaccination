@@ -50,8 +50,8 @@ public class IdCard {
 	@NotNull
 	@Past(message="DoB should be in past.")
 	private LocalDate dob;
-	@NotNull
-	@Size(min=18, message="Age should be 18 or above  ")
+//	@NotNull
+//	@Size(min=18, message="Age should be 18 or above  ")
 	private Integer age;
 	
 	@NotNull
