@@ -179,7 +179,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		}
 	}
 
-// Booking an appointment
+	// Booking an appointment
 	@Override
 	public String bookAppointment(String mobile, String vaccineName, String State, String city, String center_name,
 			LocalDate date, String slot) throws DateSlotException {
