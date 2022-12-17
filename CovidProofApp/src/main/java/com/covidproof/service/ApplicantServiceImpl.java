@@ -1,6 +1,7 @@
 package com.covidproof.service;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -58,6 +59,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 		IdCard idCard=idcardOptional.get();
 		if(idCard==null) {
 			throw new ApplicantException("Applicant Id is Not Correct");
+		}
+		if(idCard.getAge()<18) {
+			throw new ApplicantException("Applicant Age is Less Than 18");
 		}
 		List<Dose> doses=idCard.getDoses();
 		if(doses.size()>=2) {
@@ -125,7 +129,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 	    AadharCard ac=new AadharCard();
 	    ac.setAdNo(adno);
 	    ac.setMobile(idCard.getMobile());
-//	    ac.setIdCard(idCard);
+	    idCard.setAge(Period.between(idCard.getDob(), LocalDate.now()).getYears());
 	    idCard.setAadharcard(ac);
 	    addao.save(ac);
 		IdCard registeredApplicant = adao.save(idCard);

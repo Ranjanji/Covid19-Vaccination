@@ -39,21 +39,22 @@ public class IdCard {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@NotNull
-	@NotBlank
-	@NotEmpty
-	@Size(max=12, message="Enter the First Name only")
+	@NotNull(message = "name count cannot be null.")
+	@NotBlank(message = "name status cannot be blank.")
+	@NotEmpty(message = "name status cannot be empty.")
+	@Size(min=3,max=15, message="Enter the First Name only")
 	private String name;
-	@NotNull
-	@NotBlank
-	@NotEmpty
-	@Size(max=1, message="Enter M/F or m/f only")
+	@NotNull(message = "gender count cannot be null.")
+	@NotBlank(message = "gender status cannot be blank.")
+	@NotEmpty(message = "gender status cannot be empty.")
+	@Size(max=1, message="Enter M/F only")
 	private String gender;
-	@NotNull
+	@NotNull(message = "dob count cannot be null.")
+	@NotBlank(message = "dob status cannot be blank.")
+	@NotEmpty(message = "dob status cannot be empty.")
 	@Past(message="DoB should be in past.")
 	private LocalDate dob;
-//	@NotNull
-//	@Size(min=18,max=52, message="Age should be 18 or above  ")
+	
 	private Integer age;
 	
 	@NotNull

@@ -35,7 +35,7 @@ public class Dose {
 	private Integer doseId;
 	
 	@NotNull(message = "Dose count cannot be null.")
-	@Min(value = 0, message = "dose count cannot be less than 0")
+	@Min(value = 1, message = "dose count cannot be less than 0")
 	@Max(value = 2, message = "dose count cannot be more than 2")
 	private Integer doseCount;
 	

@@ -63,3 +63,8 @@ adminForm.onsubmit = function(){
 
     // window.location.href = "admin.html"
 }
+
+const getapi=()=>{
+    fetch("http://localhost:8880/admin/vaccinecenter").then(response=>response.json()).then(a=>console.log(a));
+}
+getapi();

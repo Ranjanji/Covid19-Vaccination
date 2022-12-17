@@ -27,7 +27,7 @@ public class Admin {
 	private Integer AdminId;
 	
 	@NotNull(message = "Admin name cannot be null.")
-	@Size(min = 5, message = "Admin name must be of atleast 5 character length.")
+	@Size(min = 3, message = "Admin name must be of atleast 3 character length.")
 	private String name;
 	
 	@NotNull(message = "Admin mobile number cannot be null.")

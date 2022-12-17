@@ -41,4 +41,14 @@ public class GlobelExceptionHandler {
 		ErrorDetails err=new ErrorDetails(LocalDateTime.now(),e.getMessage(),w.getDescription(false));
 		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
 	}
+	@ExceptionHandler(DoseException.class)
+	public ResponseEntity<ErrorDetails> myHandler6(DoseException e,WebRequest w){
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(),e.getMessage(),w.getDescription(false));
+		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	}
+	@ExceptionHandler(ApplicantException.class)
+	public ResponseEntity<ErrorDetails> myHandler7(ApplicantException e,WebRequest w){
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(),e.getMessage(),w.getDescription(false));
+		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	}
 }
