@@ -21,6 +21,7 @@
                <span onclick="openCloseform('login')">Login</span>
                <span onclick="openCloseform('registration')">Registration</span>
                <span onclick="openCloseform('admin')">Admin Login</span>
+               <span onclick="openCloseform('adminRegi')">Admin Register</span>
             </div>
         </div>
 
@@ -28,6 +29,7 @@
             <span onclick="openCloseform('login')">Login</span>
             <span onclick="openCloseform('registration')">Registration</span>
             <span onclick="openCloseform('admin')">Admin Login</span>
+            <span onclick="openCloseform('adminRegi')">Admin Register</span>
         </div>
     </header>
 
@@ -56,10 +58,11 @@
     <div  id="registration" class="fromBG" >
         <form class="formCss">
             <p>User Registration</p>
-            <p>Enter Your Details To Register</p>
+            <p>Enter Your Details</p>
             <span><u onclick="openCloseform('registration')">close</u></span>
             <input type="text" placeholder="name" name="name" required>
             <input type="date" placeholder="DateOfBirth" name="Dob" required>
+            <input type="text" placeholder="Mobile Number" name="mobile" required>
             <input type="text" placeholder="Gender" name="gender" required>
             <input type="text" placeholder="Address" name="address" required>
             <input type="text" placeholder="City" name="city" required>
@@ -76,6 +79,18 @@
             <p>Admin Login</p>
             <p>Enter Your Registered Mobile Number And Password</p>
             <span><u onclick="openCloseform('admin')">close</u></span>
+            <input type="text" placeholder="Mobile Number" name="mobile" required>
+            <input type="text" placeholder="Password" name="password" required>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <div id="adminRegi" class="fromBG">
+        <form class="formCss">
+            <p>Admin Registration</p>
+            <p>Enter Your Details</p>
+            <span><u onclick="openCloseform('adminRegi')">close</u></span>
+            <input type="text" placeholder="Name" name="name" required>
             <input type="text" placeholder="Mobile Number" name="mobile" required>
             <input type="text" placeholder="Password" name="password" required>
             <input type="submit" value="Login">

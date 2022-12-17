@@ -20,7 +20,7 @@
 }
 
 #nav>div:nth-child(2){
-    width: 30vw;
+    width: 40vw;
     height: 60px;
     margin-left: 10px;
     display: flex;
@@ -29,6 +29,10 @@
 
 #nav>div:nth-child(2)>span{
     cursor: pointer;
+}
+
+#nav>div:nth-child(2)>span:hover{
+    transform: scale(1.1);
 }
 
 .loginbar{
@@ -51,6 +55,7 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: none;
     justify-content: space-around;
+    font-size: 14px;
 }
 
 /* main */
@@ -97,13 +102,18 @@ main>div{
     font-weight: 600;
     position: relative;
     z-index: 1;
-    top: 40px;
+    top: 30px;
     margin: auto;
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 }
 
 .formCss>p{
     text-align: center;
+}
+
+.formCss>p:nth-child(2){
+    font-weight: 100;
+    font-size: 12px;
 }
 
 .formCss>span{
@@ -116,7 +126,7 @@ main>div{
 
 .formCss>input{
     width: 90%;
-    height: 40px;
+    height: 35px;
     margin-top: 10px;
     margin-left: 5%;
     border: none;
