@@ -41,7 +41,7 @@ public class Appointment {
 	@NotNull(message = "slot count cannot be null.")
 	@NotBlank(message = "slot status cannot be blank.")
 	@NotEmpty(message = "slot status cannot be empty.")
-	@Size(min=1,max=9,message = "Slot can be Between 1 to 9")
+	@Size(max=1,message = "Slot can be Between 1 to 9")
 	private String slot;
 	
 	private String bookingStatus;

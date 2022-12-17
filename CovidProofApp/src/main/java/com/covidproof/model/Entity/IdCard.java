@@ -50,8 +50,6 @@ public class IdCard {
 	@Size(max=1, message="Enter M/F only")
 	private String gender;
 	@NotNull(message = "dob count cannot be null.")
-	@NotBlank(message = "dob status cannot be blank.")
-	@NotEmpty(message = "dob status cannot be empty.")
 	@Past(message="DoB should be in past.")
 	private LocalDate dob;
 	
