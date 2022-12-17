@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CovidProof</title>
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+<body>
+
+    <header>
+
+        <div id="nav">
+            <div id="logo">
+                <img src="images\covidProof.png" alt="">
+            </div>
+
+            <div class="loginBar">
+                <span onclick="openCloseform('addVacc')">Add Vaccine</span>
+                <span onclick="openCloseform('addCent')">Add Center</span>
+                <span onclick="openCloseform('addInven')">Add Inventory</span>
+                <span>LogOut</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <h2>Vaccine Details</h2>
+        <div >
+            <table>
+                <thead>
+                    <th>
+                        <td>SrNo</td>
+                        <td>Vaccine Name</td>
+                        <td>Price</td>
+                        <td>Manufacturur</td>
+                        <td>Description</td>
+                        <td>Remove</td>
+                    </th>
+                </thead>
+                <tbody id="vaccDet">
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Vaccinenation Center Details</h2>
+        <div >
+            <table>
+                <thead>
+                    <th>
+                        <td>SrNo</td>
+                        <td>Name</td>
+                        <td>Address</td>
+                        <td>City</td>
+                        <td>State</td>
+                        <td>Pincode</td>
+                        <td>Inventory</td>
+                        <td>Remove</td>
+                    </th>
+                </thead>
+                <tbody id="centDet">
+
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <div id="addVacc" class="formBG">
+        <form class="formCss" >
+            <p>Enter Details To Add Vaccine</p>
+            <span><u onclick="openCloseform('addVacc')">close</u></span>
+            <input type="text" placeholder="Vaccine Name" name="name" required>
+            <input type="text" placeholder="Manufacturur" name="mgf" required>
+            <input type="text" placeholder="Price" name="price" required>
+            <input type="text" placeholder="Description" name="decr" required>
+            <input type="submit" value="Add Vaccine">
+        </form>
+    </div>
+
+    <div id="addCent" class="formBG">
+        <form class="formCss" >
+            <p>Enter Details To Add Vaccine Center</p>
+            <span><u onclick="openCloseform('addCent')">close</u></span>
+            <input type="text" placeholder="Center Name" name="name" required>
+            <input type="text" placeholder="Address" name="address" required>
+            <input type="text" placeholder="City" name="city" required>
+            <input type="text" placeholder="State" name="state" required>
+            <input type="text" placeholder="Pincode" name="pin" required>
+            <input type="submit" value="Add Center">
+        </form>
+    </div>
+
+    <div id="addInven" class="formBG">
+        <form class="formCss" >
+            <p>Enter Details To Add Vaccine Center</p>
+            <span><u onclick="openCloseform('addInven')">close</u></span>
+            <input type="text" placeholder="Center Id" name="centerID" required>
+            <input type="text" placeholder="Vaccine Id" name="vaccineID" required>
+            <input type="text" placeholder="Qunatity" name="quantity" required>
+            <input type="submit" value="Add Inventory">
+        </form>
+    </div>
+
+    
+</body>
+</html>
+
+<script src="admin.js"></script>
