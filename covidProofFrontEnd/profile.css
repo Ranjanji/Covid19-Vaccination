@@ -1,0 +1,235 @@
+/* navbar */
+#nav{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: antiquewhite;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    cursor: pointer;
+}
+#logo{
+    width: 10vw;
+}
+#logo>img{
+    height: 60px;
+    margin-left: 25px;
+}
+
+#nav>div:nth-child(2){
+    width: 40vw;
+    height: 60px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#nav>div:nth-child(2)>span{
+    cursor: pointer;
+}
+
+.loginBar{
+    text-align: center;
+    line-height: 60px;
+    font-weight: 400;
+    color: grey;
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 40px;
+}
+
+#mob{
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: antiquewhite;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: none;
+    justify-content: space-around;
+}
+
+
+/* vaccine Status */
+#vaccineStatus{
+    width: 100vw;
+    display: flex;
+    margin-top: 20px;
+}
+
+#vaccineStatus>div:first-child, #vaccineStatus>div:nth-child(2){
+    width: 100px;
+    height: 60px;
+    border: none;
+    line-height: 60px;
+    text-align: center;
+    margin-left: 25px;
+    background-color: rgb(231, 13, 13, 0.8);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#vaccineStatus>div:nth-child(3){
+    width: 600px;
+    height: 60px;
+    border: none;
+    line-height: 60px;
+    text-align: center;
+    margin-left: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* froms */
+
+.formBG{
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
+}
+
+.formCss{
+    width: 400px;
+    height: max-content;
+    background-color: antiquewhite;
+    opacity: 1;
+    border-radius: 10px;
+    padding-top: 15px;
+    color: rgb(66, 64, 64);
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+    top: 40px;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+.formCss>p{
+    text-align: center;
+}
+
+.formCss>span{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+.formCss>input, .formCss>select{
+    width: 90%;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 5%;
+    border: none;
+}
+.formCss>input:first-child{
+    margin-top: 15px;
+}
+.formCss>input:last-child{
+    width: 30%;
+    margin-left: 35%;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: none;
+    background-color: palevioletred;
+    color: white;
+    cursor: pointer;
+}
+
+.formCnt{
+    display: block;
+}
+
+.stopScroll{
+  overflow-y: hidden;  
+}
+
+a{
+    color:rgb(66, 64, 64);
+    text-decoration: none;
+}
+
+/* main */
+main{
+    margin-top: 70px;
+}
+
+/* main Box */
+#mainBox{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+#mainBox>div:nth-child(2){
+    text-align: center;
+    width: 65vw;
+    height: 70vh;
+}
+
+#mainBox>div:first-child{
+    width: 30vw;
+    height: 70vh;
+    background-color: antiquewhite;
+    border-radius: 15px;
+}
+
+
+/* profile */
+#mainBox h2{
+    color: rgb(66, 64, 64);
+}
+
+#profInfo > ul{
+    list-style: none;
+}
+
+#profInfo > ul > li{
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+/* appioint ment table details */
+table{
+   width: 90%;
+   margin-left: 5%;
+   text-align: center;
+}
+
+table>thead{
+    background-color:antiquewhite;
+    color: rgb(66, 64, 64);
+    font-weight: 600;
+    font-size: large;
+    height: 50px;
+}
+
+table>tbody>tr>td:last-child{
+    background-color: rgb(231, 13, 13, 0.8);
+}
+
+/* Deelte user */
+#DeleteUser{
+    width: 200px;
+    height: 40px;
+    background-color: rgb(231, 13, 13, 0.8);
+    margin-top: 55px;
+    margin: auto;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    font-size: 20px;
+    border-radius: 15px;
+    cursor: pointer;
+}
