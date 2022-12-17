@@ -25,7 +25,9 @@
 
 #mainBox>div:nth-child(2){
     width: 90vw; 
+    height: auto;
     margin: auto;
+    margin-bottom: 30px;
 }
 
 #vaccineStatus>div:nth-child(3){
@@ -89,19 +91,21 @@
     }
 
     #mainBox>div:nth-child(2){
-        width: 90vw; 
+        width: 95vw; 
         margin: auto;
     }
   
-    #appointDetails>table{
+    table{
         width: 100%;
-        margin: auto;
-        margin-top: 10px;
+        margin: 10px 0px 25px 0px;
+        font-size: 14px;
     }
 
-    #appointDetails>table>thead{
+    table>thead{
         width: 100%;
     }
+
+
 
     #mainBox>div:first-child{
         width: 90vw;

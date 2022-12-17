@@ -31,17 +31,14 @@
         <div >
             <table>
                 <thead>
-                    <th>
                         <td>SrNo</td>
                         <td>Vaccine Name</td>
                         <td>Price</td>
-                        <td>Manufacturur</td>
                         <td>Description</td>
                         <td>Remove</td>
-                    </th>
                 </thead>
                 <tbody id="vaccDet">
-                    
+
                 </tbody>
             </table>
         </div>
@@ -50,16 +47,13 @@
         <div >
             <table>
                 <thead>
-                    <th>
                         <td>SrNo</td>
                         <td>Name</td>
-                        <td>Address</td>
                         <td>City</td>
                         <td>State</td>
                         <td>Pincode</td>
                         <td>Inventory</td>
                         <td>Remove</td>
-                    </th>
                 </thead>
                 <tbody id="centDet">
 
@@ -74,7 +68,6 @@
             <p>Enter Details To Add Vaccine</p>
             <span><u onclick="openCloseform('addVacc')">close</u></span>
             <input type="text" placeholder="Vaccine Name" name="name" required>
-            <input type="text" placeholder="Manufacturur" name="mgf" required>
             <input type="text" placeholder="Price" name="price" required>
             <input type="text" placeholder="Description" name="decr" required>
             <input type="submit" value="Add Vaccine">
@@ -105,7 +98,21 @@
         </form>
     </div>
 
-    
+    <div id="inventoryDisplay" class="formBG">
+        <div>
+            <p>Vaccine Inventory</p>
+            <span><u onclick="openCloseform('inventoryDisplay')">close</u></span>
+            <table>
+                <thead>
+                    <td>Sr No</td>
+                    <td>Vaccine Name</td>
+                    <td>Quantity</td>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+
 </body>
 </html>
 

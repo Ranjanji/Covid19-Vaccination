@@ -31,6 +31,10 @@
     cursor: pointer;
 }
 
+#nav>div:nth-child(2)>span:hover{
+    transform: scale(1.1);
+}
+
 .loginBar{
     text-align: center;
     line-height: 60px;
@@ -68,8 +72,27 @@ table{
     height: 50px;
 }
 
+table>tbody>tr>td:first-child{
+    width: 50px;
+}
+
 table>tbody>tr>td:last-child{
     background-color: rgb(231, 13, 13, 0.8);
+    color: white;
+    cursor: pointer;
+    width: 80px;
+}
+
+table>tbody>tr>td:last-child:hover{
+    transform: scale(1.05);
+}
+
+table>tbody>tr>td:nth-child(6){
+    cursor: pointer;
+}
+
+table>tbody>tr:nth-child(even){
+    background-color: rgb(250, 235, 215, 0.4);
 }
 
 /* froms */
@@ -140,4 +163,26 @@ table>tbody>tr>td:last-child{
 
 .stopScroll{
   overflow-y: hidden;  
+}
+
+/* Show inventory */
+#inventoryDisplay > div{
+    width: 500px;
+    height: 300px;
+    background-color: white;
+    margin: 50px auto auto auto;
+    padding: 1%;
+    border-radius: 10px;
+}
+
+#inventoryDisplay >div>span{
+    position: relative;
+    top: -50px;
+    left: 455px;
+    cursor: pointer;
+}
+
+#inventoryDisplay >div>p{
+    text-align: center;
+    font-weight: 600;
 }

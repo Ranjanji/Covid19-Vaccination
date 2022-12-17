@@ -12,15 +12,29 @@ loginForm.onsubmit = function(){
 
     let Obj = {
         'mobile': loginForm.mobile.value,
-        'DOb': loginForm.Dob.value
+        'dob': loginForm.Dob.value
     }
 
-    fetch('https://reqbin.com/echo/post/json', {
-    method: 'POST',
-    body: JSON.stringify(Obj)
-    })
-    .then(response => response.json())
-    .then(response => console.log(JSON.stringify(response)));
+    const logInApplicant = async () => {
+        let options = {
+                method: "POST",
+                headers: {
+                        "Content-type": "application/json"
+                },
+                body: JSON.stringify(Obj),
+        }
+        let p = await fetch('http://localhost:8880/user/login', options)
+        let response = await p.json()
+        console.log(response);
+        return response
+    };
+
+    if(logInApplicant!=null){
+        alert("Login Sucessfull");
+        window.location.href="profile.html";
+    }else{
+        alert("Invalid Username Or Password");
+    }
 
 }
 
@@ -30,24 +44,42 @@ let regiForm = document.querySelector('#registration>form');
 regiForm.onsubmit = function(){
      let Obj = {
         'name':regiForm.name.value,
-        'DateOfBirth':regiForm.Dob.value,
+        'dob':regiForm.Dob.value,
         'gender':regiForm.gender.value,
         'address':regiForm.address.value,
+        'mobile':regiForm.mobile.value,
         'city':regiForm.city.value,
         'state':regiForm.state.value,
         'pincode':regiForm.pincode.value,
-        'adharCard':regiForm.adharCard.value,
-        'pancard':regiForm.pancard.value
+        'adharCard':{
+            'mobile':regiForm.mobile.value,
+             'adNo':regiForm.adharCard.value
+        },
+        'pancard':{
+            'panNumber':regiForm.pancard.value
+        }
     }
 
-    fetch('https://reqbin.com/echo/post/json', {
-    method: 'POST',
-    body: JSON.stringify(Obj)
-    })
-    .then(response => response.json())
-    .then(response => console.log(JSON.stringify(response)));
+    const registerApplicant = async () => {
+        let options = {
+                method: "POST",
+                headers: {
+                        "Content-type": "application/json"
+                },
+                body: JSON.stringify(Obj),
+        }
+        let p = await fetch('http://localhost:8880/user/register/'+regiForm.adharCard.value, options)
+        let response = await p.json()
+        console.log(response);
+        return response
+    }
 
     // registration successfull alert
+    if(registerApplicant!=null){
+        alert("Applicant Registered Sucessfully");
+    }else{
+        alert("Applicant Registration Failed!!!");
+    }
 }
 
 
@@ -61,6 +93,58 @@ adminForm.onsubmit = function(){
         'password':adminForm.password.value
     }
 
+    const logInAdmin = async () => {
+        let options = {
+                method: "POST",
+                headers: {
+                        "Content-type": "application/json"
+                },
+                body: JSON.stringify(Obj),
+        }
+        let p = await fetch('http://localhost:8880/admin/login', options)
+        let response = await p.json()
+        console.log(response);
+        return response
+    }
+
+    if(logInAdmin!=null) {
+        alert("Login Successfull");
+        window.location.href = "admin.html";
+    }else{
+        alert("Invalid Username Or Password!!!");
+    }
+}
+
+// Admin Registration
+let adminRegi = document.querySelector('#adminRegi>form');
+
+adminRegi.onsubmit = function(){
+    event.preventDefault();
+    let Obj = {
+        'name':adminRegi.name.value,
+        'mobile':adminRegi.mobile.value,
+        'password':adminRegi.password.value
+    }
+
+    const registerAdmin = async () => {
+        let options = {
+                method: "POST",
+                headers: {
+                        "Content-type": "application/json"
+                },
+                body: JSON.stringify(Obj),
+        }
+        let p = await fetch('http://localhost:8880/admin/register', options)
+        let response = await p.json()
+        console.log(response);
+        return response
+    }
+
+    if(registerAdmin!=null){
+        alert("Admin Registered Sucessfully");
+    }else{
+        alert("Admin Registration Failed!!!");
+    }
     // window.location.href = "admin.html"
 }
 
