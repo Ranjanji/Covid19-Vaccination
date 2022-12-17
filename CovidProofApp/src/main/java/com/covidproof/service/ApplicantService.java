@@ -39,10 +39,10 @@ public interface ApplicantService {
 	public List<String> getVaccinationStatus(String mobile) throws ApplicantException;
 	
 	// Canceling appointment
-	public String cancelAppointment(String mobile, LocalDate dob) throws ApplicantException;
+	public String cancelAppointment(Integer id) throws ApplicantException;
 	
 	// Change slot
-	public String changeSlot(String mobile, LocalDate dob, LocalDate newDate, String newSlot) throws ApplicantException;
+	public Appointment changeSlot(Appointment appointment) throws ApplicantException;
 	
 	// If applicant wants to know about all kinds of available vaccines
 	public List<Vaccine> getAllVaccineDetails() throws VaccineException;

@@ -204,30 +204,16 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 
 	@Override
-	public String cancelAppointment(String mobile, LocalDate dob) throws ApplicantException {
-		IdCard existingApplicant =  adao.findByMobAndDob(mobile, dob);
-		
-		if(existingApplicant!=null) {
-			List<Dose> doses = existingApplicant.getDoses();
-			Dose[] dosesArr = doses.toArray(new Dose[doses.size()]);
-			
-			for(int i=0;i<dosesArr.length;i++) {
-				if(dosesArr[i].getDoseStatus()=="Pending") {
-					Appointment appointment = dosesArr[i].getAppointment();
-					if(appointment.getBookingStatus()=="Booked") {
-						appointment.setBookingStatus("Available");
-						return "Appointment Cancelled.";
-					} else {
-						return "Appointment not yet booked. Please book first.";
-					}
-				}
-			}
-			return "You have already taken all your doses.";
-		} 
-		else {
-			throw new ApplicantException("Incorrect mobile number or incorrect dob or both. Please try again.");
-			
+	public String cancelAppointment(Integer id) throws ApplicantException {
+		Optional<Dose> opt=doseDAO.findById(id);
+		if(opt==null) {
+			throw new DoseException("Dose id is Invalid");
 		}
+		Dose dose=opt.get();
+		Appointment ap=dose.getAppointment();
+		doseDAO.delete(dose);
+		appdao.delete(ap);
+		return "Appointment Cancel Success full";
 	}
 
 	
@@ -265,34 +251,12 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 
 	
-	public String changeSlot(String mobile, LocalDate dob, LocalDate newDate, String newSlot) throws ApplicantException {
-		IdCard existingApplicant =  adao.findByMobAndDob(mobile, dob);
-		
-		if(existingApplicant!=null) {
-			List<Dose> doses = existingApplicant.getDoses();
-			Dose[] dosesArr = doses.toArray(new Dose[doses.size()]);
-			
-			for(int i=0;i<dosesArr.length;i++) {
-				Appointment appointment = dosesArr[i].getAppointment();
-				if(dosesArr[i].getDoseStatus()=="Pending") {
-					Appointment requirdeAppointment = appdao.getAppointmentByDateAndSlot(newDate, newSlot);
-					if(requirdeAppointment.getBookingStatus()=="Available") {
-						requirdeAppointment.setBookingStatus("Booked");
-						dosesArr[i].getAppointment().setDate(newDate);
-						dosesArr[i].getAppointment().setSlot(newSlot);
-						dosesArr[i].getAppointment().setBookingStatus("Available");		
-						return "New slot booked. "+newDate+" and "+newSlot;
-						} else {
-							return "This slot is already booked. Please try another one.";
-						}
-				}
-			}
-			return "You have already taken all your doses. Not applicable.";
+	public Appointment changeSlot(Appointment appointment) throws ApplicantException {
+		Optional<Appointment> opt=appdao.findById(appointment.getBookingid());
+		if(opt==null) {
+			throw new ApplicantException("Booking ID of Appointment is Not Correct");
 		}
-		else {
-			throw new ApplicantException("Incorrect mobile number or incorrect dob or both. Please try again.");
-		}
-		
+		return appdao.save(appointment);
 	}
 
 	
