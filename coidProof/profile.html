@@ -56,7 +56,7 @@
                     </ul>
             </div>
 
-            <div id="appointDetails">
+            <div >
                 <h2>Appointment Details</h2>
                     
                 <table>
@@ -68,9 +68,11 @@
                             <td>Date</td>
                             <td>Slot</td>
                             <td>Vaccine</td>
+                            <td>Cancle</td>
                         </th>
                     </thead>
-                    <tbody>
+
+                    <tbody id="appointDetails">
                     </tbody>
 
                 </table>
@@ -83,12 +85,12 @@
             <form class="formCss">
                 <p>Book Appointment</p>
                 <span><u onclick="openCloseform('booking')">close</u></span>
-                <select name="" id="">
+                <select name="" id="" name="dose" required>
                     <option value="">Select Dose</option>
                     <option value="dose1">Dose 1</option>
                     <option value="dose2">Dose 2</option>
                 </select>
-                <select name="" id="">
+                <select name="" id="" name="vaccine" required>
                     <option value="">Select Vaccine</option>
                     <option value="">Covid Sheild</option>
                     <option value="">Bharat Vax</option>
@@ -96,7 +98,7 @@
                     <option value="">Sputnik V</option>
                 </select>
 
-                <select name="" id="centerState" onclick="showCity('centerState')">
+                <select name="" id="centerState" name="state" onclick="showCity('centerState')" required>
                     <option value="">Select State</option>
                     <option value="0">Delhi</option>
                     <option value="1">Karnataka</option>
@@ -105,16 +107,16 @@
                     <option value="4">West Bengal</option>
                 </select>
 
-                <select name="" id="centerCity" onclick="showCenter('centerCity')">
+                <select name="" id="centerCity" name="city" onclick="showCenter('centerCity')" required>
                     <option value="">Select City</option>
                 </select>
 
-                <select name="" id="centerName">
+                <select name="" id="centerName" name="centerName" required>
                     <option value="">Select Center</option>
                 </select>
 
-                <input type="Date" placeholder="Select Date">
-                <select name="" id="" value="Select Slot">
+                <input type="Date" placeholder="Select Date" name="bookingDate" required>
+                <select name="" id="" value="" name="slot" required>
                     <option value="">Select Slot</option>
                     <option value="slot1">Slot 1(9.00am to 9.30am)</option>
                     <option value="slot2">Slot 2(9.30am to 10.00am)</option>
@@ -136,7 +138,8 @@
             <form class="formCss">
                 <p>Search Slot</p>
                 <span><u onclick="openCloseform('serachSlot')">close</u></span>
-                <select name="" id="">
+
+                <select name="" id="" name="vaccine" required>
                     <option value="">Select Vaccine</option>
                     <option value="">Covid Sheild</option>
                     <option value="">Bharat Vax</option>
@@ -144,7 +147,7 @@
                     <option value="">Sputnik V</option>
                 </select>
 
-                <select name="" id="centerStateSer" onclick="showCitySer('centerStateSer')">
+                <select name="" id="centerStateSer" name="state" onclick="showCitySer('centerStateSer')" required>
                     <option value="">Select State</option>
                     <option value="0">Delhi</option>
                     <option value="1">Karnataka</option>
@@ -153,19 +156,25 @@
                     <option value="4">West Bengal</option>
                 </select>
 
-                <select name="" id="centerCitySer" onclick="showCenterSer('centerCitySer')">
+                <select name="" id="centerCitySer" name="city" onclick="showCenterSer('centerCitySer')" required>
                     <option value="">Select City</option>
                 </select>
 
-                <select name="" id="centerNameSer">
+                <select name="" id="centerNameSer" name="name" required>
                     <option value="">Select Center</option>
                 </select>
+
                 <input type="submit" value="Search Slot">
             </form>
 
         </div>
 
     </main>
+    <footer>
+        <div id="DeleteUser">
+            Delete Account
+        </div>
+    </footer>
 
     <div class="loginbar" id="mob">
         <span  onclick="openCloseform('serachSlot')"><a href="#serachSlot">Search Slot</a></span>

@@ -43,8 +43,11 @@
 }
 
 #mainBox>div:first-child{
-    width: 90vw;
+    width: 80vw;
     margin-top: 10px;
+    height: auto;
+    padding: 15px 0 15px 0;
+    margin: auto;
 }
 }
 
@@ -103,5 +106,9 @@
     #mainBox>div:first-child{
         width: 90vw;
         margin-top: 10px;
+    }
+    /* delete button */
+    #DeleteUser{
+        margin-bottom: 70px;
     }
 }

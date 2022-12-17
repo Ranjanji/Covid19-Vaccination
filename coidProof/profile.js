@@ -148,3 +148,28 @@ function openCloseform(x){
     document.getElementById(x).classList.toggle('formCnt');
     document.querySelector('body').classList.toggle('stopScroll');
 }
+
+// bppking appointmenr
+let bookappont = document.querySelector('#booking>form');
+
+bookappont.addEventListener(onsubmit, function(){
+let Obj = {
+    'dose':bookappont.dose.value,
+    'vaccine':bookappont.vaccine.value,
+    'centerID':bookappont.vaccine.center,
+    'dateOfBooking':bookappont.dateOfBooking.value,
+    'slot':bookappont.slot.value
+}
+
+});
+
+
+// serching slot
+let slotSearch = document.querySelector('#serachSlot>form');
+
+slotSearch.addEventListener(onsubmit, function(){
+
+    let Obj = {
+        
+    }
+})

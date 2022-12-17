@@ -48,7 +48,7 @@
             <p>Enter Your Registered Mobile Number And Date Of Birth</p>
             <span><u onclick="openCloseform('login')">close</u></span>
             <input type="text" name="mobile" placeholder="Mobile Number" required>
-            <input type="date" name="date" placeholder="Date Of Birth" required>
+            <input type="date" name="Dob" placeholder="Date Of Birth" required>
             <input type="submit" value="Login">
         </form>
     </div>
@@ -58,15 +58,15 @@
             <p>User Registration</p>
             <p>Enter Your Details To Register</p>
             <span><u onclick="openCloseform('registration')">close</u></span>
-            <input type="text" placeholder="name" required>
-            <input type="date" placeholder="DateOfBirth"  required>
-            <input type="text" placeholder="Gender" required>
-            <input type="text" placeholder="Address" required>
-            <input type="text" placeholder="City" required>
-            <input type="text" placeholder="State" required>
-            <input type="text" placeholder="pincode" required>
-            <input type="text" placeholder="AdharcardNo" required>
-            <input type="text" placeholder="PancardNo" required>
+            <input type="text" placeholder="name" name="name" required>
+            <input type="date" placeholder="DateOfBirth" name="Dob" required>
+            <input type="text" placeholder="Gender" name="gender" required>
+            <input type="text" placeholder="Address" name="address" required>
+            <input type="text" placeholder="City" name="city" required>
+            <input type="text" placeholder="State" name="state" required>
+            <input type="text" placeholder="pincode" name="pin" required>
+            <input type="text" placeholder="AdharcardNo" name="adhar" required>
+            <input type="text" placeholder="PancardNo" name="pan" required>
             <input type="submit" value="Register">
         </form>
     </div>
@@ -76,8 +76,8 @@
             <p>Admin Login</p>
             <p>Enter Your Registered Mobile Number And Password</p>
             <span><u onclick="openCloseform('admin')">close</u></span>
-            <input type="text" placeholder="Mobile Number">
-            <input type="text" placeholder="Password">
+            <input type="text" placeholder="Mobile Number" name="mobile" required>
+            <input type="text" placeholder="Password" name="password" required>
             <input type="submit" value="Login">
         </form>
     </div>
