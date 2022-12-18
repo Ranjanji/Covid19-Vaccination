@@ -1,32 +1,9 @@
-1.
-create table VaccineRegistration(mobileNumber long,dateOfRegistration date);
+create table aadhar_card (ad_no bigint not null, mobile varchar(10) not null, primary key (ad_no));
+create table admin (admin_id integer not null, mobile varchar(10) not null, name varchar(255) not null, password varchar(12) not null, primary key (admin_id));
+create table appointment (bookingid integer not null, booking_status varchar(255), date date not null, mobile_no varchar(10) not null, slot varchar(1) not null, primary key (bookingid));
+create table current_session (user_id integer not null, local_date_time datetime(6), uuid varchar(255), primary key (user_id));
+create table dose (dose_id integer not null, dose_count integer not null, dose_status varchar(255) not null, bookingid integer, center_code integer, vaccine_id integer, id integer, primary key (dose_id));
+create table id_card (id integer not null, address varchar(50) not null, age integer, city varchar(255) not null, dob date not null, gender varchar(1) not null, mobile varchar(10) not null, name varchar(15) not null, pan_number varchar(255), pincode varchar(6) not null, state varchar(255) not null, ad_no bigint, primary key (id));
+create table vaccine (vaccine_id integer not null, description varchar(255) not null, name varchar(255) not null, primary key (vaccine_id));
+create table vaccine_center (center_code integer not null, address varchar(50) not null, center_name varchar(30) not null, city varchar(255) not null, pincode varchar(6) not null, state varchar(255) not null, primary key (center_code));
 
-2.
-create table VaccinationCenter(code int,centerName varchar(255),address varchar(255),
-city varchar(255),state varchar(255),pincode varchar(255));
-
-3.
-create table Member(dose1Status tinyint,dose2Status tinyint,dose1Date date,dose2Date date);
-
-4.
-create table VaccineCount(count int,price double);
-
-5.
-create table AadharCard(aadharNo long,fingerPrints varchar(255),irisscan varchar(255));
-
-6.
-create table PanCard(panNo varchar(255));
-
-7.
-create table VaccineInventory(LocalDate date);
-
-8.
-create table IdCard(id int,name varchar(255),dob date,gender varchar(255),
-address varchar(255),city varchar(255),state varchar(255),pincode varchar(255));
-
-9.
-create table Vaccine(vaccineId int,vaccineName varchar(255),description varchar(255));
-
-10.
-create table Appointment(bookingId long,mobileNo long,bookingDate date,slot varchar(255),
-status tinyint);
