@@ -124,8 +124,10 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Override
 	public IdCard registerAnApplicant(IdCard idCard,Long adno) throws ApplicantException,AadharException {
 		Optional<AadharCard> op=addao.findById(adno);
-	    if(op.isPresent())
-	    	throw new AadharException("AadharCard is Already Registered!!");
+		IdCard op1 = adao.findByMobile(idCard.getMobile());
+	    if(op.isPresent() || op1!=null) {
+	    	throw new AadharException("AadharCard or Moblie is Already Registered!!");
+	    }
 	    AadharCard ac=new AadharCard();
 	    ac.setAdNo(adno);
 	    ac.setMobile(idCard.getMobile());

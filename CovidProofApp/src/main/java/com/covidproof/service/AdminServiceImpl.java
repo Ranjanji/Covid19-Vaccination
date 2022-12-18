@@ -28,6 +28,9 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Admin registerAdmin(Admin admin) throws AdminException {
 		// TODO Auto-generated method stub
+		Admin admin3=dao.findByMobile(admin.getMobile());
+		if(admin3==null)
+			throw new AdminException("Mobile Already Registered");
 		Admin admin2=dao.save(admin);
 		if(admin2==null) {
 			throw new AdminException("Enter Valid Moblie Number or Password.");

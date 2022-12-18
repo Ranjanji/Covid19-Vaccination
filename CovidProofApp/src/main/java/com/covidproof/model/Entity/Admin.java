@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +36,7 @@ public class Admin {
 	private String mobile;
 	
 	@NotNull(message = "Admin password cannot be null.")
+	@Pattern(regexp = "^((?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])){4,12}$",message = "password must contain atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit ")
 	@Size(min = 5, max = 12, message = "Admin password must be minimum 5 & maximum 12 character length.")
 	private String password;
 }
