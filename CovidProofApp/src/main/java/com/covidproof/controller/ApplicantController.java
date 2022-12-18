@@ -43,7 +43,7 @@ public class ApplicantController {
 	private AadharcardService acService;
 	
 	@PostMapping("/login")
-	public ResponseEntity<IdCard> loginAdmin(@Valid @RequestBody ApplicantLogin al){
+	public ResponseEntity<IdCard> loginApplicant(@Valid @RequestBody ApplicantLogin al){
 		return new ResponseEntity<>(service.loginApplicant(al.getMobile(), al.getDob()), HttpStatus.ACCEPTED);
 	}
 	
