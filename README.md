@@ -9,7 +9,7 @@
     <li><a href="#Features">Features</a></li>
     <li><a href="#Tech">Tech Stack</a></li>
     <li><a href="#modules">Modules</a></li>
-    <li><a href="#installations">Installation</a></li>
+    <li><a href="#install">Installation</a></li>
     <li><a href="#usage">API Root Usage</a></li>
     <li><a href="#contributors">Contributors</a></li>
    
@@ -66,7 +66,7 @@
 * User Module
 * Appointment Module
 
-<a href="installations"></a>
+<a href="install"></a>
 ## Installation & Run
 
 * Before running the API server, you should update the database config inside the [application.properties](https://github.com/Ranjanji/dapper-spade-5134/blob/main/CovidProofApp/src/main/resources/application.properties) file. 
@@ -82,7 +82,7 @@
 ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<a href="#usage"></a>
+<a href="usage"></a>
 
 ## API Root Endpoint
 ```
