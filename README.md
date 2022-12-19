@@ -1,5 +1,6 @@
 <a name="readme-top"></a> 
-# Covid-19 Vaccination (CovidProof App)
+<h1><img align="center" height="150" src="https://github.com/Ranjanji/dapper-spade-5134/blob/main/covidProof.png">Covid-19 Vaccination (CovidProof App) </h1>
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -8,7 +9,7 @@
     <li><a href="#Features">Features</a></li>
     <li><a href="#Tech">Tech Stack</a></li>
     <li><a href="#modules">Modules</a></li>
-    <li><a href="#installation">Installation</a></li>
+    <li><a href="#installations">Installation</a></li>
     <li><a href="#usage">API Root Usage</a></li>
     <li><a href="#contributors">Contributors</a></li>
    
@@ -65,7 +66,7 @@
 * User Module
 * Appointment Module
 
-<a href="installation"></a>
+<a href="installations"></a>
 ## Installation & Run
 
 * Before running the API server, you should update the database config inside the [application.properties](https://github.com/Ranjanji/dapper-spade-5134/blob/main/CovidProofApp/src/main/resources/application.properties) file. 
