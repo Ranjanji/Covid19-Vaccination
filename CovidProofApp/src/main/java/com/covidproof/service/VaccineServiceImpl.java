@@ -70,4 +70,15 @@ public class VaccineServiceImpl implements VaccineService{
 		else return vaccList;
 	}
 
+	@Override
+	public Integer getIdByName(String name) throws VaccineException {
+		int id = vaccineDao.getIdByName(name);
+		if(id!=0) {
+			return id;
+		}
+		else {
+			throw new VaccineException("No vaccine exist with name:"+name);
+		}
+	}
+
 }

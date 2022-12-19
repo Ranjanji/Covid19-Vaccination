@@ -11,4 +11,5 @@ public interface VaccineService {
     public Vaccine getVaccineById(Integer vaccineId) throws VaccineException;
     public Vaccine deleteVaccine(Integer vaccineId) throws VaccineException;
     public List<Vaccine> getAllVaccine() throws VaccineException;
+	public Integer getIdByName(String name);
 }

@@ -11,6 +11,5 @@ public interface VaccineCenterService {
 	public VaccineCenter deleteVaccineCenter(Integer centerCode) throws VaccineCenterException;
 	public VaccineCenter getVaccineById(Integer centerCode) throws VaccineCenterException;
 	public List<VaccineCenter> getAllVaccineCenter() throws VaccineCenterException;
-	
-	
+	public Integer getVCIdByName(String name);
 }

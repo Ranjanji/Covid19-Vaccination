@@ -71,4 +71,15 @@ public class VaccineCenterServiceImpl implements VaccineCenterService{
 		else return vCenterList;
 	}
 
+	@Override
+	public Integer getVCIdByName(String name) throws VaccineCenterException {
+		int id = vaccineCenterDao.getIdByName(name);
+		if(id!=0) {
+			return id;
+		}
+		else {
+			throw new VaccineCenterException("No vaccine center exist with name:"+name);
+		}
+	}
+
 }
