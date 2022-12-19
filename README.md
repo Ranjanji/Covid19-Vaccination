@@ -9,8 +9,7 @@
     <li><a href="#Tech">Tech Stack</a></li>
     <li><a href="#modules">Modules</a></li>
     <li><a href="#installation">Installation</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#usage">API Root Usage</a></li>
     <li><a href="#contributors">Contributors</a></li>
    
   </ol>
@@ -51,6 +50,7 @@
 * Spring Data JPA
 * Hibernate
 * MySQL
+* Postman
 * JavaScript
 * HTML5
 * CSS3
@@ -65,128 +65,124 @@
 * User Module
 * Appointment Module
 
-<a href="install"></a>
+<a href="installation"></a>
 ## Installation & Run
 
-* Before running the API server, you should update the database config inside the [application.properties](CovidProof\src\main\resources\application.properties) file. 
+* Before running the API server, you should update the database config inside the [application.properties](https://github.com/Ranjanji/dapper-spade-5134/blob/main/CovidProofApp/src/main/resources/application.properties) file. 
 * Update the port number, username and password as per your local database config.
 
 ```
     server.port=8880
-    spring.datasource.url=jdbc:mysql://localhost:3306/CovidProof;
+    spring.datasource.url=jdbc:mysql://localhost:3306/CovidProof
     spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
     spring.datasource.username=root
     spring.datasource.password=root
 
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Sample API Response for admin Login
+<a href="#usage"></a>
 
-`POST: http://covid19vaccinationapi-env-1.eba-becpxd2x.ap-south-1.elasticbeanstalk.com/swagger-ui.html#/user-controller/userLoginUsingPOST_1`
-
-* Request Body
-
-```
-    {
-        "Mobile": "8502245750",
-        "password": "Pass@123"
-    }
-```
-
-* Response
-
-```
-   Login Successful.
-```
-
-# API Root Endpoint
+## API Root Endpoint
 ```
 https://localhost:8880/
 ```
 ```
 http://localhost:8880/swagger-ui/index.html
 ```
-<!-- # API References
+### Sample API Response for applicant/user Register
 
-## Customer Requests
+`POST: http://localhost:8880/swagger-ui/index.html#/applicant-controller/registerApplicant`
 
-### Member Controller
-
-| Request | METHOD     |  URI | Description                |
-| :-------- | :------- | :----- | :------------------------- |
-| `PUT` | `Update` | `http://localhost:8080/user/update` | Update existing user |
-| `POST` | `register` | `http://localhost:8080/user/register` | Register new user |
-| `POST` | `Login` | `http://localhost:8080/user/login` | User Login |
-| `POST` | `Book Appointment` | `http://localhost:8080/user/bookappointment` | Book Appoinment |
-| `POST` | `Appointment Detail` | `http://localhost:8080/user/appointmentdetails` | Appointment Detail |
-| `POST` | `Get Member` | `http://localhost:8080/user/getmeber/mobile` | Get Member By Mobile Number |
-| `GET` | `Center List` | `http://localhost:8080/user/allcenters` | Center List |
-| `DELETE` | `Delete` | `http://localhost:8080/user/delete` | Delete existing user |
-| `DELETE` | `Cancel Appointment` | `http://localhost:8080/user/cancelappointment` | Cancel Appoinment |
-
-## Admin Requests
-
-### Vaccine Center Admin Controller :
-
-| Request | METHOD     |  URI | Description                |
-| :-------- | :------- | :----- | :------------------------- |
-| `PUT` | `Update Center` | `http://localhost:8080/admin/updatecenter` | Update Center Details |
-| `DELETE` | `Delete Center` | `http://localhost:8080/admin/removecenter` | Remove Center Details |
-| `GET` | `Center List` | `http://localhost:8080/admin/allcenters` | Get All center Details |
-| `POST` | `Create Center` | `http://localhost:8080/admin/savecenter` | Save new center details |
-| `POST` | `Center By Id` | `http://localhost:8080/admin/getcenterbyid` | Get Center details by center ID |
-
-
-# Sample API response - Member Registeration
-
-### Request Type
-```
-POST
-```
-
-### Request URI
-```
-http://localhost:8080/user/register
-```
-
-### Request Body
+* Request Body
 ```
 {
-    "mobileno": "9953805224",
-    "passWord":"ram@123",
-    "adharcard": {
-        "adharNo": "224319664199",
-        "name": "Ramesh",
-        "dob": "08/15/1995",
-        "gender": "Male",
-        "addressline": "Ayodhya",
-        "city": "Ayodhya",
-        "state": "UP",
-        "pincode": "432939"
-    }
+  
+  "name": "Subham Ranjan",
+  "gender": "M",
+  "dob": "1997-08-27",
+  "age": 25,
+  "address": "Badarpur, New Delhi",
+  "city": "New Delhi",
+  "state": "Delhi",
+  "pincode": "110044",
+  "mobile": "9311971746",
+  "pancard": "65NL0CVX"
+  
 }
 ```
 ### Response Body
 
 ```
 {
-    "memberId": 5,
-    "mobileno": "9953805224",
-    "passWord": "ram@123",
-    "adharcard": {
-        "adharNo": "224319664199",
-        "name": "Ramesh",
-        "dob": "08/15/1995",
-        "gender": "Male",
-        "addressline": "Ayodhya",
-        "city": "Ayodhya",
-        "state": "UP",
-        "pincode": "432939"
-    }
+  "id": 1,
+  "name": "Subham Ranjan",
+  "gender": "M",
+  "dob": [1997,8,27],
+  "age": 25,
+  "address": "Badarpur, New Delhi",
+  "city": "New Delhi",
+  "state": "Delhi",
+  "pincode": "110044",
+  "mobile": "9311971746",
+  "pancard": {
+    "panNumber": "65NL0CVX"
+  },
+  "aadharcard": {
+    "adNo": 224246106463,
+    "mobile": "9311971746"
+  },
+  "doses": null
 }
 
-``` -->
+
+``` 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Sample API Response for applicant/user Login
+
+`POST: http://localhost:8880/swagger-ui/index.html#/applicant-controller/loginApplicant`
+
+* Request Body
+
+```
+    {
+        "Mobile": "9311971746",
+        "dob": "1997-08-27"
+    }
+```
+
+* Response Body
+
+```
+  {
+  "id": 1,
+  "name": "Subham Ranjan",
+  "gender": "M",
+  "dob": [
+    1997,
+    8,
+    27
+  ],
+  "age": 25,
+  "address": "Badarpur, New Delhi",
+  "city": "New Delhi",
+  "state": "Delhi",
+  "pincode": "110044",
+  "mobile": "9311971746",
+  "pancard": {
+    "panNumber": "65NL0CVX"
+  },
+  "aadharcard": {
+    "adNo": 224246106463,
+    "mobile": "9311971746"
+  },
+  "doses": []
+}
+```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 <a href="contributors"></a>
+
 ## Contributors
 
 * [Subham Ranjan](https://github.com/Ranjanji)
