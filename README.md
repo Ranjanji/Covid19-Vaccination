@@ -59,14 +59,14 @@
 [![My Skills](https://skillicons.dev/icons?i=java,spring,javascript,html,css,maven,hibernate,github,git,vscode&theme=light)](https://skillicons.dev)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<a href="modules"></a>
+<a name="modules"></a>
 ## Modules
 
 * Admin Module
 * User Module
 * Appointment Module
 
-<a href="install"></a>
+<a name="install"></a>
 ## Installation & Run
 
 * Before running the API server, you should update the database config inside the [application.properties](https://github.com/Ranjanji/dapper-spade-5134/blob/main/CovidProofApp/src/main/resources/application.properties) file. 
@@ -82,7 +82,7 @@
 ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<a href="usage"></a>
+<a name="usage"></a>
 
 ## API Root Endpoint
 ```
