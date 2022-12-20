@@ -49,7 +49,6 @@
 * Spring Framework
 * Spring Boot
 * Spring Data JPA
-* Hibernate
 * MySQL
 * Postman
 * JavaScript
