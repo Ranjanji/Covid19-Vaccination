@@ -51,6 +51,7 @@
 * Spring Data JPA
 * MySQL
 * Postman
+* Swagger
 * JavaScript
 * HTML5
 * CSS3
