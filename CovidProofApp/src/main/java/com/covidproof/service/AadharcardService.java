@@ -1,9 +1,15 @@
 package com.covidproof.service;
 
+import com.covidproof.exception.AadharException;
 import com.covidproof.model.Entity.AadharCard;
 
 public interface AadharcardService {
-	public AadharCard addAadharCard(AadharCard ac);
-	public AadharCard getAadharCard(Long num);
-	public Boolean checkIfRegistered(Long num);
+	//Add AadharCard of Applicant
+	public AadharCard addAadharCard(AadharCard ac) throws AadharException;
+	
+	//Get AadharCard Details by Aadhar number
+	public AadharCard getAadharCard(Long adNo) throws AadharException;
+	
+	//Check AadharaCard is registered or Not
+	public Boolean checkIfRegistered(Long adNo);
 }

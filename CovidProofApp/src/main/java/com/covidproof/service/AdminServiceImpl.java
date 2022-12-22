@@ -24,7 +24,7 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private CurrentSessionDAO csDao;
 	
-//Admin Registration
+    //Admin Registration
 	@Override
 	public Admin registerAdmin(Admin admin) throws AdminException {
 		// TODO Auto-generated method stub
@@ -37,8 +37,9 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return admin2;
 	}
-//Admin Login Using Admin DTO for security purposes
-//Admin Session is also checked 	
+	
+    //Admin Login Using Admin DTO for security purposes
+    //Admin Session is also checked 	
 	@Override
 	public Admin loginAdmin(AdminLoginDTO aLoginDto) throws AdminException {
 		
@@ -66,7 +67,8 @@ public class AdminServiceImpl implements AdminService {
 		
 		return admin;
 	}
-//Admin Update Password Using AdminPasswordDTO for security purposes
+	
+    //Admin Update Password Using AdminPasswordDTO for security purposes
 	@Override
 	public Admin updatePassword(AdminPasswordDTO aPassDto) throws AdminException {
         
@@ -86,15 +88,7 @@ public class AdminServiceImpl implements AdminService {
 		return dao.save(admin);
 		
 	}
-	@Override
-	public CurrentSession adminSession(String mobile) throws AdminException {
-		Admin admin=dao.findByMobile(mobile);
-		if(admin==null) throw new AdminException("Please Enter a valid Mobile Number/////");
-		
-		Optional <CurrentSession> userSession=csDao.findById(admin.getAdminId());
-		if(!userSession.isPresent()) throw new AdminException("Please Login First");
-		return userSession.get();
-	}
+	//Admin LogOut Using Session key for security purposes
 	@Override
 	public Admin logoutAdmin(String key) throws AdminException {
 		
@@ -106,6 +100,17 @@ public class AdminServiceImpl implements AdminService {
 		csDao.delete(adminSession);
 	    if(!admin.isPresent()) throw new AdminException("Register Admin Not found...please Resister");
 		return admin.get();
+	}
+	
+	//Creating Admin's Current Session
+	@Override
+	public CurrentSession adminSession(String mobile) throws AdminException {
+		Admin admin=dao.findByMobile(mobile);
+		if(admin==null) throw new AdminException("Please Enter a valid Mobile Number/////");
+		
+		Optional <CurrentSession> userSession=csDao.findById(admin.getAdminId());
+		if(!userSession.isPresent()) throw new AdminException("Please Login First");
+		return userSession.get();
 	}
 
 }

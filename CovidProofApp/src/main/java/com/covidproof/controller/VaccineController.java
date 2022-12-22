@@ -14,6 +14,7 @@ public class VaccineController {
 	@Autowired
 	private VaccineService vService;
 	
+	//get vaccine id by vaccine center name
 	@GetMapping("/getVaccId/{vname}")
 	public ResponseEntity<Integer> getIdByName(@PathVariable("vname") String name){
 		Integer id = vService.getIdByName(name);

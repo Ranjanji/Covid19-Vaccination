@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -22,12 +23,10 @@ import lombok.ToString;
 @Getter
 @Setter
 public class ApplicantLogin {
-	@NotNull
-	@NotBlank
-	@NotEmpty
-	@Size(min=10,max=10, message="Mobile number should be of 10digit")
+	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must consist of 10 digits")
 	private String mobile;
-	@NotNull
-	@Past
+	
+	@NotNull(message = "dob cannot be null.")
+	@Past(message="DoB should be in past.")
 	private LocalDate dob;
 }

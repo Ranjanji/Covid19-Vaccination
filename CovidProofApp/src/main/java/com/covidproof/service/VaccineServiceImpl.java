@@ -15,13 +15,14 @@ public class VaccineServiceImpl implements VaccineService{
 	@Autowired
 	private VaccineDAO vaccineDao;
 
+	//Add Vaccine Details
 	@Override
 	public Vaccine addVaccine(Vaccine vaccine) throws VaccineException {
 		Vaccine v=vaccineDao.save(vaccine);
 		if(v==null) throw new VaccineException("Vaccine not found");
 		return v;
 	}
-
+	//Update Vaccine Details
 	@Override
 	public Vaccine updateVaccine(Vaccine vaccine) throws VaccineException {
 	    Optional<Vaccine> opt=vaccineDao.findById(vaccine.getVaccineId());
@@ -34,6 +35,7 @@ public class VaccineServiceImpl implements VaccineService{
 	    
 	}
 
+	//Delete Vaccine Details
 	@Override
 	public Vaccine deleteVaccine(Integer vaccineId) throws VaccineException {
 		Optional<Vaccine> opt = vaccineDao.findById(vaccineId);
@@ -49,7 +51,7 @@ public class VaccineServiceImpl implements VaccineService{
 		} 
 			else throw new VaccineException("Vaccine not found with vaccine id :" + vaccineId);
 	}
-
+	//Get Vaccine Details by vaccine id
 	@Override
 	public Vaccine getVaccineById(Integer vaccineId) throws VaccineException {
 		Optional<Vaccine> opt = vaccineDao.findById(vaccineId);
@@ -63,6 +65,7 @@ public class VaccineServiceImpl implements VaccineService{
 			else throw new VaccineException("Vaccine not found with vaccine id :" + vaccineId);
 	}
 
+	//Get all Vaccine Details
 	@Override
 	public List<Vaccine> getAllVaccine() throws VaccineException {
 		List<Vaccine> vaccList= vaccineDao.findAll();
@@ -70,6 +73,7 @@ public class VaccineServiceImpl implements VaccineService{
 		else return vaccList;
 	}
 
+	//get Vaccine code(id) by Name
 	@Override
 	public Integer getIdByName(String name) throws VaccineException {
 		int id = vaccineDao.getIdByName(name);

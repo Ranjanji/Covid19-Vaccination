@@ -19,6 +19,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.covidproof.model.NonEntity.PanCard;
@@ -39,51 +40,59 @@ public class IdCard {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@NotNull(message = "name count cannot be null.")
-	@NotBlank(message = "name status cannot be blank.")
-	@NotEmpty(message = "name status cannot be empty.")
-	@Size(min=3,max=15, message="Enter the First Name only")
+	
+	@NotNull(message = "name cannot be null.")
+	@NotBlank(message = "name cannot be blank.")
+	@NotEmpty(message = "name cannot be empty.")
+	@Size(min=3,max=15, message="Name should be of 3 to 15 characters")
 	private String name;
-	@NotNull(message = "gender count cannot be null.")
-	@NotBlank(message = "gender status cannot be blank.")
-	@NotEmpty(message = "gender status cannot be empty.")
+	
+	@NotNull(message = "gender cannot be null.")
+	@NotBlank(message = "gender cannot be blank.")
+	@NotEmpty(message = "gender cannot be empty.")
 	@Size(max=1, message="Enter M/F only")
 	private String gender;
-	@NotNull(message = "dob count cannot be null.")
+	
+	@NotNull(message = "dob cannot be null.")
 	@Past(message="DoB should be in past.")
 	private LocalDate dob;
 	
+	//Verified accordingly as per DOB
 	private Integer age;
 	
-	@NotNull
-	@NotBlank
-	@NotEmpty
+	@NotNull(message = "address details cannot be null.")
+	@NotBlank(message = "address details cannot be blank.")
+	@NotEmpty(message = "address details cannot be empty.")
 	@Size(min=7,max=50, message="Enter your full address")
 	private String address;
-	@NotNull
-	@NotBlank
-	@NotEmpty
+	
+	@NotNull(message = "city name cannot be null.")
+	@NotBlank(message = "city name cannot be blank.")
+	@NotEmpty(message = "city name cannot be empty.")
 	private String city;
-	@NotBlank
-	@NotEmpty
-	@NotNull
+	
+	@NotNull(message = "state name cannot be null.")
+	@NotBlank(message = "state name cannot be blank.")
+	@NotEmpty(message = "state name cannot be empty.")
 	private String state;
-	@NotBlank
-	@NotEmpty
-	@NotNull
-	@Size(min=6,max=6, message="Enter your 6digit pinCode")
+	
+	@NotNull(message="pincode should not be null")
+	@Pattern(regexp = "^[0-9]{6}",message="Pincode Length must be 6 digits")
 	private String pincode;
-	@NotNull
-	@NotBlank
-	@NotEmpty
-	@Size(min=10,max=10, message="Mobile number should be of 10digit")
+	
+	@NotNull(message="Mobile no should not be null")
+	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must be 10 digits")
 	private String mobile;
+	
+	
 	@Embedded
-	private PanCard pancard;
+	private PanCard pancard;  //For saving PanCard details of Applicant 
+	
 	@OneToOne
 	@JoinColumn(name = "adNo")
-	private AadharCard aadharcard;
-	@OneToMany(cascade = CascadeType.ALL) //unidirectional
+	private AadharCard aadharcard;   //unidirectional relation with AadharCard Entity
+	
+	@OneToMany(cascade = CascadeType.ALL) //unidirectional relation with Dose Entity
 	@JoinColumn(name="id")
 	private List<Dose> doses;
 }

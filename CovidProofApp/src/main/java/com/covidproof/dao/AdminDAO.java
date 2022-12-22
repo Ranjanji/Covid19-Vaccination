@@ -11,6 +11,7 @@ import com.covidproof.model.Entity.Admin;
 //Admin can view,update IdCard Details
 @Repository
 public interface AdminDAO extends JpaRepository<Admin, Integer> {
+	//Checking Admin details for login
 	@Query("select a from Admin a where a.mobile=?1 and a.password=?2 ")
 	public Admin loginAdmin(String mobile,String password);
 	public Admin findByMobile(String mobile);
