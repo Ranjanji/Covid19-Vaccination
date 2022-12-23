@@ -8,6 +8,6 @@ import com.covidproof.model.Entity.CurrentSession;
 
 @Repository
 public interface CurrentSessionDAO extends JpaRepository<CurrentSession,Integer> {
-	
+	//Get Current Session of user by user unique id
 	public CurrentSession findByUuid(String uuid);
 }

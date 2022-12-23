@@ -18,11 +18,10 @@ import lombok.ToString;
 @Getter
 @Setter
 public class AdminLoginDTO {
-	@NotNull(message="Mobile number should be of 10digit")
-	@NotBlank(message="Mobile number should be of 10digit")
-	@NotEmpty(message="Mobile number should be of 10digit")
-	@Size(min=10,max=10, message="Mobile number should be of 10digit")
+	@NotNull(message="Mobile no should not be null")
+	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must consist 10 digits")
 	private String mobile;
+	
 	@NotNull(message = "Password cannot be null.")
 	@Pattern(regexp = "^[a-zA-Z0-9]{8}",message="Length length must be 8 character")
 	private String password;

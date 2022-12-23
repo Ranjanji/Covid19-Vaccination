@@ -3,8 +3,11 @@ package com.covidproof.exception;
 import java.time.LocalDateTime;
 
 public class ErrorDetails {
+	//error current date and tiem
 	private LocalDateTime timestamp;
+	//Validations message and error messages
 	private String message;
+	//details of errors
 	private String details;
 	@Override
 	public String toString() {

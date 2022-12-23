@@ -43,57 +43,76 @@ public class AdminController {
 	@Autowired 
 	private ApplicantService apService;
 	
+	//Admin login
 	@PostMapping("/login")
 	public ResponseEntity<Admin> loginAdmin(@Valid @RequestBody AdminLoginDTO aLoginDto){
 		return new ResponseEntity<>(aservice.loginAdmin(aLoginDto), HttpStatus.ACCEPTED);
 	}
+	
+	//Admin logout
 	@PostMapping("/logout/{mob}")
 	public ResponseEntity<Admin> logoutAdmin(@Valid @PathVariable("mob") String mobile){
 		return new ResponseEntity<>(aservice.logoutAdmin(aservice.adminSession(mobile).getUuid()), HttpStatus.ACCEPTED);
 	}
 	
+	//Admin register
 	@PostMapping("/register")
 	public ResponseEntity<Admin> registerAdmin(@Valid @RequestBody Admin a){
 		return new ResponseEntity<Admin>(aservice.registerAdmin(a),HttpStatus.ACCEPTED);
 	}
+	//update admin
 	@PutMapping("/update")
 	public ResponseEntity<Admin> updatePassword(@Valid @RequestBody AdminPasswordDTO aPassDto){
 		return new ResponseEntity<Admin>(aservice.updatePassword(aPassDto),HttpStatus.ACCEPTED);
 	}
+	
+	//get all vaccine details
 	@GetMapping("/vaccine")
 	public ResponseEntity<List<Vaccine>> getAllVaccine(){
 		return new ResponseEntity<List<Vaccine>>(vService.getAllVaccine(),HttpStatus.FOUND);
 	}
+	
+	//get all vaccine center details
 	@GetMapping("/vaccinecenter")
 	public ResponseEntity<List<VaccineCenter>> getAllVaccineCenter(){
 		return new ResponseEntity<List<VaccineCenter>>(vcService.getAllVaccineCenter(),HttpStatus.FOUND);
 	}
+	
+	//add vaccine
 	@PostMapping("/vaccine/{mob}")
 	public ResponseEntity<Vaccine> addVaccine(@Valid @RequestBody Vaccine v,@PathVariable("mob")String mobile){
 		    aservice.adminSession(mobile);
 			return new ResponseEntity<Vaccine>(vService.addVaccine(v),HttpStatus.ACCEPTED);
 	}
+	
+	//add vaccine center
 	@PostMapping("/vaccinecenter/{mob}")
 	public ResponseEntity<VaccineCenter> addVaccineCenter(@Valid @RequestBody VaccineCenter vc,@PathVariable("mob")String mobile){
 		aservice.adminSession(mobile);
 		return new ResponseEntity<>(vcService.addVaccineCenter(vc),HttpStatus.ACCEPTED);
 	}
 	
+	//delete vaccine
 	@DeleteMapping("/vaccine/{mob}/{id}")
 	public ResponseEntity<Vaccine> deleteVaccine(@Valid @PathVariable("mob")String mobile,@PathVariable("id")Integer id){
 		aservice.adminSession(mobile);
 		return new ResponseEntity<Vaccine>(vService.deleteVaccine(id),HttpStatus.ACCEPTED);
 	}
+	
+	//delete vaccine center
 	@DeleteMapping("/vaccinecenter/{mob}/{id}")
 	public ResponseEntity<VaccineCenter> deleteVaccineCenter(@Valid @PathVariable("mob")String mobile,@PathVariable("id")Integer id){
 		aservice.adminSession(mobile);
 		return new ResponseEntity<>(vcService.deleteVaccineCenter(id),HttpStatus.ACCEPTED);
 	}
 	
+	//get all Applicant details
 	@GetMapping("/idcards")
 	public ResponseEntity<List<IdCard>> getAllCards(){
 		return new ResponseEntity<List<IdCard>>(apService.getAllIdCards(),HttpStatus.FOUND);
 	}
+	
+	//delete applicant details
 	@DeleteMapping("/idcard/{mob}/{id}")
 	public ResponseEntity<Boolean> deleteCard(@Valid @PathVariable("mob")String mobile,@PathVariable("id")Integer id){
 		aservice.adminSession(mobile);

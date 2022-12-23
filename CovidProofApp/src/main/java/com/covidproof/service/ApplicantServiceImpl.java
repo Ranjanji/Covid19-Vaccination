@@ -35,8 +35,10 @@ import com.covidproof.model.NonEntity.Status;
 public class ApplicantServiceImpl implements ApplicantService {
 	@Autowired
 	private ApplicantDAO adao;
+	
 	@Autowired
 	private AadharDAO addao;
+	
 	@Autowired
 	private AppointmentDAO appdao;
 		
@@ -48,7 +50,88 @@ public class ApplicantServiceImpl implements ApplicantService {
 	
 	@Autowired
 	private DoseDAO doseDAO;
+	
+	//Register Applicant Details
+	@Override
+	public IdCard registerAnApplicant(IdCard idCard,Long adno) throws ApplicantException,AadharException {
+		Optional<AadharCard> op=addao.findById(adno);
+		IdCard op1 = adao.findByMobile(idCard.getMobile());
+	    if(op.isPresent() || op1!=null) {
+	    	throw new AadharException("AadharCard or Moblie is Already Registered!!");
+	    }
+	    AadharCard ac=new AadharCard();
+	    ac.setAdNo(adno);
+	    ac.setMobile(idCard.getMobile());
+	    idCard.setAge(Period.between(idCard.getDob(), LocalDate.now()).getYears());
+	    idCard.setAadharcard(ac);
+	    addao.save(ac);
+		IdCard registeredApplicant = adao.save(idCard);
+		if(registeredApplicant!=null) {
+			return registeredApplicant;
+		} else {
+			throw new ApplicantException("Registration failed! Please try again with valid credentials. :)");
+		}
+	}
 
+	//get all Applicant Details
+	@Override
+	public List<IdCard> getAllIdCards() throws ApplicantException {
+		// TODO Auto-generated method stub
+		List<IdCard> list=adao.findAll();
+		if(list.size()==0) {
+			throw new ApplicantException("No Applicant Details");
+		}
+		return list;
+	}
+	
+	// Applicant Login
+	@Override
+	public IdCard loginApplicant(String mobile, LocalDate dob) throws ApplicantException {
+		IdCard applicant = adao.findByMobAndDob(mobile, dob);
+		if(applicant!=null) {
+			return applicant;
+		} else {
+			throw new ApplicantException("Login failed. Incorrect mobile number or incorrect dob or both.");
+		}
+	}
+
+	//delete Applicant Details
+	@Override
+	public Boolean deleteCard(Integer id) throws ApplicantException {
+		// TODO Auto-generated method stub
+		Optional<IdCard> opt=adao.findById(id);
+		IdCard card=opt.get();
+		if(card==null) {
+			throw new ApplicantException("Applicant Id is not Correct");
+		}
+		adao.delete(card);
+		return true;
+	}
+	
+	// Get applicant by id
+	@Override
+	public IdCard getApplicantById(Integer id) throws ApplicantException {
+		Optional<IdCard> opt = adao.findById(id);
+		if(opt!=null) {
+			IdCard existingApplicant = opt.get();
+			return existingApplicant;
+		} else {
+			throw new ApplicantException("No applicant found with this Id");
+		}
+	}
+
+	// Update applicant details
+	@Override
+	public IdCard updateApplicantDetails(IdCard idCard) throws ApplicantException {
+		IdCard updatedApplicantDetails = adao.save(idCard);
+		if(updatedApplicantDetails!=null) {
+			return updatedApplicantDetails;
+		} else {
+			throw new ApplicantException("No such applicant found."+idCard);
+		}
+	}
+
+	//Apply for vaccination
 	@Override
 	public IdCard applyForVaccination(Integer id,Integer vid, Integer vcid, Integer dose, Appointment appointment)
 			throws ApplicantException {
@@ -121,58 +204,8 @@ public class ApplicantServiceImpl implements ApplicantService {
 		 
 		return idCard;
 	}
-	@Override
-	public IdCard registerAnApplicant(IdCard idCard,Long adno) throws ApplicantException,AadharException {
-		Optional<AadharCard> op=addao.findById(adno);
-		IdCard op1 = adao.findByMobile(idCard.getMobile());
-	    if(op.isPresent() || op1!=null) {
-	    	throw new AadharException("AadharCard or Moblie is Already Registered!!");
-	    }
-	    AadharCard ac=new AadharCard();
-	    ac.setAdNo(adno);
-	    ac.setMobile(idCard.getMobile());
-	    idCard.setAge(Period.between(idCard.getDob(), LocalDate.now()).getYears());
-	    idCard.setAadharcard(ac);
-	    addao.save(ac);
-		IdCard registeredApplicant = adao.save(idCard);
-		if(registeredApplicant!=null) {
-			return registeredApplicant;
-		} else {
-			throw new ApplicantException("Registration failed! Please try again with valid credentials. :)");
-		}
-	}
-
-	@Override
-	public IdCard loginApplicant(String mobile, LocalDate dob) throws ApplicantException {
-		IdCard applicant = adao.findByMobAndDob(mobile, dob);
-		if(applicant!=null) {
-			return applicant;
-		} else {
-			throw new ApplicantException("Login failed. Incorrect mobile number or incorrect dob or both.");
-		}
-	}
-
-	@Override
-	public IdCard getApplicantById(Integer id) throws ApplicantException {
-		Optional<IdCard> opt = adao.findById(id);
-		if(opt!=null) {
-			IdCard existingApplicant = opt.get();
-			return existingApplicant;
-		} else {
-			throw new ApplicantException("No applicant found with this Id");
-		}
-	}
-
-	@Override
-	public IdCard updateApplicantDetails(IdCard idCard) throws ApplicantException {
-		IdCard updatedApplicantDetails = adao.save(idCard);
-		if(updatedApplicantDetails!=null) {
-			return updatedApplicantDetails;
-		} else {
-			throw new ApplicantException("No such applicant found."+idCard);
-		}
-	}
-
+	
+	// Checking vaccination status
 	@Override
 	public List<String> getVaccinationStatus(String mobile) throws ApplicantException {
 		
@@ -205,6 +238,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		}
 	}
 
+	// Canceling appointment
 	@Override
 	public String cancelAppointment(Integer id) throws ApplicantException {
 		Optional<Dose> opt=doseDAO.findById(id);
@@ -231,28 +265,8 @@ public class ApplicantServiceImpl implements ApplicantService {
 		}
 	}
 
-	public List<IdCard> getAllIdCards() throws ApplicantException {
-		// TODO Auto-generated method stub
-		List<IdCard> list=adao.findAll();
-		if(list.size()==0) {
-			throw new ApplicantException("No Applicant Details");
-		}
-		return list;
-	}
-
+	// Change slot for appointment
 	@Override
-	public Boolean deleteCard(Integer id) throws ApplicantException {
-		// TODO Auto-generated method stub
-		Optional<IdCard> opt=adao.findById(id);
-		IdCard card=opt.get();
-		if(card==null) {
-			throw new ApplicantException("Applicant Id is not Correct");
-		}
-		adao.delete(card);
-		return true;
-	}
-
-	
 	public Appointment changeSlot(Appointment appointment) throws ApplicantException {
 		Optional<Appointment> opt=appdao.findById(appointment.getBookingid());
 		if(opt==null) {

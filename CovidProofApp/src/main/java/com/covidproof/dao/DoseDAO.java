@@ -9,5 +9,6 @@ import com.covidproof.model.Entity.Dose;
 import com.covidproof.model.Entity.VaccineCenter;
 
 public interface DoseDAO extends JpaRepository<Dose, Integer> {
+	//get Dose list by center 
 	public List<Dose> findByCenter(VaccineCenter center);
 }

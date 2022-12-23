@@ -18,10 +18,14 @@ import lombok.ToString;
 @ToString
 @Entity
 public class CurrentSession {
-	
+	//foreign key for login users
 	@Id
 	private Integer userId;
+	
+	//User Unique Id
 	private String uuid;
+	
+	//Current session login time
 	private LocalDateTime localDateTime;	
 }
 

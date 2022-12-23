@@ -19,13 +19,16 @@ public class AadharcardServiceImpl implements AadharcardService {
 	@Autowired
 	private AadharDAO dao;
 
+	//Add AadharCard of Applicant
 	@Override
 	public AadharCard addAadharCard(AadharCard ac) {
-		AadharCard aadharCard=dao.save(ac);
+		if(checkIfRegistered(ac.getAdNo())) throw new AadharException("Aadhar card Already Registered");
 		
+		AadharCard aadharCard=dao.save(ac);
 		return aadharCard;
 	}
 
+	//Get AadharCard Details by Aadhar number
 	@Override
 	public AadharCard getAadharCard(Long num) throws AadharException{
 		Optional<AadharCard> optional=dao.findById(num);
@@ -37,15 +40,10 @@ public class AadharcardServiceImpl implements AadharcardService {
 		return ac;
 	}
 
+	//Check AadharaCard is registered or Not
 	@Override
 	public Boolean checkIfRegistered(Long num) {
-		// TODO Auto-generated method stub
-		Optional<AadharCard> optional=dao.findById(num);
-	    AadharCard ac=optional.get();
-	    if(ac==null) {
-	    	return false;
-	    }
-		return true;
+		return dao.findById(num).isPresent();   
 	}
 
 }
