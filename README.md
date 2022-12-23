@@ -17,10 +17,6 @@
   </ol>
 </details>
 
-<a name="er"></a>
-## ER Diagram
-![App Screenshot](https://github.com/Ranjanji/dapper-spade-5134/blob/main/db_schema.png)
-
 <a name="about-the-project"></a>
 # REST API for an Covid-19 Vaccination app having UI based functionality.
 
@@ -61,7 +57,9 @@
 [![My Skills](https://skillicons.dev/icons?i=java,spring,javascript,html,css,maven,hibernate,github,git,vscode&theme=light)](https://skillicons.dev)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
+<a name="er"></a>
+## ER Diagram
+![App Screenshot](https://github.com/Ranjanji/dapper-spade-5134/blob/main/db_schema.png)
 
 <a name="modules"></a>
 
