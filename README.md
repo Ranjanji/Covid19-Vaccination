@@ -17,7 +17,7 @@
   </ol>
 </details>
 
-<a name="about-the-project"></a> 
+<a name="about-the-project"></a>
 # REST API for an Covid-19 Vaccination app having UI based functionality.
 
 * We have developed this REST API for an Covid-19 Vaccination. This API performs all the fundamental CRUD operations to facilitate the citizen with an       option to register and schedule the vaccination session online in the Centers of their choice. 
@@ -190,7 +190,7 @@ http://localhost:8880/swagger-ui/index.html
 
 ## Contributors
 
-* [Subham Ranjan](https://github.com/Ranjanji)
+* [Subham Ranjan](https://github.com/Ranjanji) (Team Lead)
 * [Sumit Panchal](https://github.com/sumitpanchal08)
 * [Roshan Patro](https://github.com/Roshan-Patro)
 * [Kapil Khurasde](https://github.com/kapil-khursade)
