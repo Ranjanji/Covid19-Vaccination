@@ -62,7 +62,10 @@ public class ApplicantServiceImpl implements ApplicantService {
 	    AadharCard ac=new AadharCard();
 	    ac.setAdNo(adno);
 	    ac.setMobile(idCard.getMobile());
-	    idCard.setAge(Period.between(idCard.getDob(), LocalDate.now()).getYears());
+	    int age=Period.between(idCard.getDob(), LocalDate.now()).getYears();
+	    if(age>=18) idCard.setAge(age);
+	    else throw new ApplicantException("Applicant age must be at least 18 years");
+	    
 	    idCard.setAadharcard(ac);
 	    addao.save(ac);
 		IdCard registeredApplicant = adao.save(idCard);
