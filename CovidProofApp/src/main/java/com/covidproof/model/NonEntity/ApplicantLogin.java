@@ -23,7 +23,8 @@ import lombok.ToString;
 @Getter
 @Setter
 public class ApplicantLogin {
-	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must consist of 10 digits")
+	
+	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must be 10 digits [0-9]")
 	private String mobile;
 	
 	@NotNull(message = "dob cannot be null.")

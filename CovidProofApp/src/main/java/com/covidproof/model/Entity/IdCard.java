@@ -63,7 +63,7 @@ public class IdCard {
 	@NotNull(message = "address details cannot be null.")
 	@NotBlank(message = "address details cannot be blank.")
 	@NotEmpty(message = "address details cannot be empty.")
-	@Size(min=7,max=50, message="Enter your full address")
+	@Size(min=7,max=70, message="Enter your full address")
 	private String address;
 	
 	@NotNull(message = "city name cannot be null.")
@@ -76,12 +76,11 @@ public class IdCard {
 	@NotEmpty(message = "state name cannot be empty.")
 	private String state;
 	
-	@NotNull(message="pincode should not be null")
-	@Pattern(regexp = "^[0-9]{6}",message="Pincode Length must be 6 digits")
+	@Pattern(regexp = "^[0-9]{6}",message="Pincode Length must be 6 digits [0-9]")
 	private String pincode;
 	
-	@NotNull(message="Mobile no should not be null")
-	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must be 10 digits")
+	
+	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must be 10 digits [0-9]")
 	private String mobile;
 	
 	

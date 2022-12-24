@@ -51,7 +51,6 @@ public class VaccineCenter {
 	@Size(min=3, message="Enter state name must consist of 3 characters.")
 	private String state;
 	
-	@NotNull(message="pincode should not be null")
-	@Pattern(regexp = "^[0-9]{6}",message="PinCode Length must be 6 digits")
+	@Pattern(regexp = "^[0-9]{6}",message="PinCode Length must be 6 digits [0-9]")
 	private String pincode;
 }
