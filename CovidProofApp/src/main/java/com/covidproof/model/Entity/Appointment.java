@@ -31,11 +31,9 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer bookingid;
 	
-	@NotNull(message = "slot count cannot be null.")
-	@NotBlank(message = "slot status cannot be blank.")
-	@NotEmpty(message = "slot status cannot be empty.")
-	@Size(min=10,max=10, message="Mobile number should be of 10 digit")
-	private String mobileNo;
+	@NotNull(message="Mobile no should not be null")
+	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must be 10 digits")
+	private String mobile;
 	
 	@NotNull
 	@FutureOrPresent(message="Appointment should be present date or future")

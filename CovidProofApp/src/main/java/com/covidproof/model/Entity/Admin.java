@@ -31,8 +31,8 @@ public class Admin {
 	@Size(min = 3, message = "Admin name must be of atleast 3 character length.")
 	private String name;
 	
-	@NotNull(message = "Admin mobile number cannot be null.")
-	@Size(min = 10, max = 10, message = "Mobile number must be of 10 digits.")
+	@NotNull(message="Mobile no should not be null")
+	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must be 10 digits")
 	private String mobile;
 	
 	@NotNull(message = "Admin password cannot be null.")

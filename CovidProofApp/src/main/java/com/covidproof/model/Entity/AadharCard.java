@@ -30,9 +30,8 @@ public class AadharCard {
 	@Id
 	@NotNull
 	private Long adNo;
-	@NotNull
-	@NotBlank
-	@NotEmpty
-	@Size(min=10,max=10, message="Mobile number should be of 10 digit")
+	
+	@NotNull(message="Mobile no should not be null")
+	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must be 10 digits")
 	private String mobile;
 }

@@ -63,7 +63,7 @@ public class IdCard {
 	@NotNull(message = "address details cannot be null.")
 	@NotBlank(message = "address details cannot be blank.")
 	@NotEmpty(message = "address details cannot be empty.")
-	@Size(min=7,max=50, message="Enter your full address")
+	@Size(min=7,max=70, message="Enter your full address")
 	private String address;
 	
 	@NotNull(message = "city name cannot be null.")
