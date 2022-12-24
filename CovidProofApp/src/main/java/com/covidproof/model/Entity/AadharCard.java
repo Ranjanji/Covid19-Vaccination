@@ -12,6 +12,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +32,6 @@ public class AadharCard {
 	@NotNull
 	private Long adNo;
 	
-	@NotNull(message="Mobile no should not be null")
-	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must be 10 digits")
+	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must be 10 digits [0-9]")
 	private String mobile;
 }

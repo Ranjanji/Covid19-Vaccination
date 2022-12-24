@@ -10,6 +10,7 @@ import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GeneratorType;
@@ -31,7 +32,6 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer bookingid;
 	
-	@NotNull(message="Mobile no should not be null")
 	@Pattern(regexp = "^[0-9]{10}",message="Mobile number length must be 10 digits")
 	private String mobile;
 	
