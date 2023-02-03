@@ -1,7 +1,7 @@
 <h1 align="center">Covid-19 Vaccination (CovidProof App)</h1>
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/107461385/216694864-c5a55ed0-55a8-4ce5-bb19-e783f5405784.png" width="800px" height="500px"/>
+<img src="https://user-images.githubusercontent.com/107461385/216694864-c5a55ed0-55a8-4ce5-bb19-e783f5405784.png" width="700px" height="450px"/>
 </p>
 <br />
 
