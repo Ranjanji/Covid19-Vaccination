@@ -1,5 +1,10 @@
-<a name="readme-top"></a> 
-<h1><img align="center" height="150" src="https://github.com/Ranjanji/dapper-spade-5134/blob/main/covidProof.png">Covid-19 Vaccination (CovidProof App) </h1>
+<h1 align="center">Covid-19 Vaccination (CovidProof App)</h1>
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/107461385/216694864-c5a55ed0-55a8-4ce5-bb19-e783f5405784.png" width="800px" height="500px"/>
+</p>
+<br />
+
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -59,7 +64,10 @@
 
 <a name="er"></a>
 ## ER Diagram
-![App Screenshot](https://github.com/Ranjanji/dapper-spade-5134/blob/main/db_schema.png)
+<p align="center">
+<img src="https://user-images.githubusercontent.com/107461385/216695105-20286e5a-116b-4bae-9901-9abe5bd394b3.png" width="800px" height="500px"/>
+</p>
+<br />
 
 <a name="modules"></a>
 
