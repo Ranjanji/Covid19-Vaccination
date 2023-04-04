@@ -1,5 +1,5 @@
 <a name="readme-top"></a> 
-<h1><img align="center" height="150" src="https://github.com/Ranjanji/dapper-spade-5134/blob/main/covidProof.png">Covid-19 Vaccination (CovidProof App) </h1>
+<h1><img align="center" height="150" src="https://github.com/Ranjanji/dapper-spade-5134/blob/main/covidProof.png"> Covid-19 Vaccination (CovidProof App) </h1>
 
 
 <!-- TABLE OF CONTENTS -->
